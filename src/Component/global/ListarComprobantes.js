@@ -344,6 +344,8 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
+                            <th>Asignar/Desagsinar</th>
+
                         </tr>
                     </thead>
                     <tbody>{listado.map((dynamicData, i) =>
@@ -374,6 +376,10 @@ class ListarComponentes extends Component {
                                     onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-primary">
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
+                            </td>
+                            <td className="two-fields">
+                                <button className="btn btn-success btnIzq" onClick="handleToAsignar">Asignar</button>
+                                <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
                             </td>
                         </tr>
                     )}
