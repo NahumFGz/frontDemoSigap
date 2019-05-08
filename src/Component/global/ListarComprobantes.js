@@ -11,6 +11,8 @@ import './css/bootstrap.css';
 import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
 
+import ModalAsignarDesasignar from './ModalAsignarDesasignar';
+
 
 class ListarComponentes extends Component {
     constructor(...props) {
@@ -231,7 +233,7 @@ class ListarComponentes extends Component {
     }
 
     openModalAsignar(){
-        let component = <MyModal  onChange={this.handleChangeObs_comentarios} estado={true} />;
+        let component = <ModalAsignarDesasignar  onChange={this.handleChangeObs_comentarios} estado={true} />;
         let node = document.createElement('div');
         ReactDOM.render(component, node);
     }
@@ -387,7 +389,9 @@ class ListarComponentes extends Component {
                             </td>
                             <td className="two-fields">
                                 <button className="btn btn-success btnIzq"
-                                     onClick={(e) => this.openModalAsignar()}>Asignar</button>
+                                     onClick={(e) => this.openModalAsignar()}>
+                                     Asignar
+                                </button>
                                 <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
                             </td>
                         </tr>
