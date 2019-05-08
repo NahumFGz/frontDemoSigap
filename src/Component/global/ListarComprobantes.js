@@ -27,6 +27,8 @@ class ListarComponentes extends Component {
         this.verificar = this.verificar.bind(this);
         this.groupBy = this.groupBy.bind(this);
         this.eventoNombre = this.eventoNombre.bind(this);
+
+        this.openModalAsignar = this.openModalAsignar.bind(this);
         this.state = {
             data: null,
             dataOrdenada: null,
@@ -227,6 +229,12 @@ class ListarComponentes extends Component {
         ReactDOM.render(component, node);
 
     }
+
+    openModalAsignar(){
+        let component = <MyModal id_rec={id} obs={obs} onChange={this.handleChangeObs_comentarios} estado={true} />;
+        let node = document.createElement('div');
+        ReactDOM.render(component, node);
+    }
     openModalUpg(e) {
         let id = e;
         const url = 'https://modulocontrol.herokuapp.com/recaudaciones/observaciones/' + id;
@@ -378,7 +386,8 @@ class ListarComponentes extends Component {
                                 </button>
                             </td>
                             <td className="two-fields">
-                                <button className="btn btn-success btnIzq" onClick="handleToAsignar">Asignar</button>
+                                <button className="btn btn-success btnIzq"
+                                     onClick={(e) => this.openModalAsignar()}>Asignar</button>
                                 <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
                             </td>
                         </tr>
