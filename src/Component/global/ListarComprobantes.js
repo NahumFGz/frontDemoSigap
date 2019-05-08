@@ -231,7 +231,7 @@ class ListarComponentes extends Component {
     }
 
     openModalAsignar(){
-        let component = <MyModal id_rec={id} obs={obs} onChange={this.handleChangeObs_comentarios} estado={true} />;
+        let component = <MyModal  onChange={this.handleChangeObs_comentarios} estado={true} />;
         let node = document.createElement('div');
         ReactDOM.render(component, node);
     }
