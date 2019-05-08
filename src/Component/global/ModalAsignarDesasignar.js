@@ -45,7 +45,7 @@ class ModalAsignarDesasignar extends Component {
                         <Label>Observaciones</Label>
                     </ModalHeader>
                     <ModalBody>
-                        <Input type="textarea" readOnly className="form-control" placeholder="Ingrese su nombre" />
+                        <Input type="text" className="form-control" placeholder="Ingrese su nombre" />
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.close}>Cerrar</Button>

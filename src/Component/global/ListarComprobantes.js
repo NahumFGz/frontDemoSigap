@@ -390,9 +390,12 @@ class ListarComponentes extends Component {
                             <td className="two-fields">
                                 <button className="btn btn-success btnIzq"
                                      onClick={(e) => this.openModalAsignar()}>
-                                     Asignar
+                                     A
                                 </button>
-                                <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
+                                <button className="btn btn-danger"
+                                onClick={(e) => this.openModalAsignar()}>
+                                    D
+                                </button>
                             </td>
                         </tr>
                     )}
