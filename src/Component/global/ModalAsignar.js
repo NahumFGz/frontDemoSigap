@@ -42,10 +42,10 @@ class ModalAsignar extends Component {
             <div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} external={externalCloseBtn}>
                     <ModalHeader>
-                        <Label>Observaciones</Label>
+                        <Label>Asignar</Label>
                     </ModalHeader>
                     <ModalBody>
-                        <Input type="text"className="form-control" id="message-text"  />
+                        <Input type="text"c lassName="form-control" placeholder="Buscar por Nombre" />
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.close}>Cerrar</Button>

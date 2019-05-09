@@ -42,7 +42,7 @@ class ModalAsignarDesasignar extends Component {
             <div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} external={externalCloseBtn}>
                     <ModalHeader>
-                        <Label>Observaciones</Label>
+                        <Label>Desasignar</Label>
                     </ModalHeader>
                     <ModalBody>
                         <Input type="text" className="form-control" placeholder="Ingrese su nombre" />
