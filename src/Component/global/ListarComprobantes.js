@@ -130,7 +130,7 @@ class ListarComponentes extends Component {
 
     //crea un objeto para pasar al hijo
     Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto,descripcion,sigla_programa , codigo, recibo,
-        moneda, mascara, importe, fecha, dni, nombre_programa) {
+        moneda, mascara, importe, fecha, dni, nombre_programa,id_registro) {
         this.id_rec = id_rec;
         this.obs = obs;
         this.obs_upg = obs_upg;
@@ -147,6 +147,7 @@ class ListarComponentes extends Component {
         this.importe = importe;
         this.dni = dni;
         this.nombre_programa = nombre_programa;
+        this.id_registro = id_registro;
         //console.log(convertDateFormat(fecha.substr(0,10)));
         if (fecha !== null) {
             let fTemp = fecha.substr(0, 10).split("-");
