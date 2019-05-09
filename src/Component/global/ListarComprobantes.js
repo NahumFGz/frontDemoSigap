@@ -362,6 +362,20 @@ class ListarComponentes extends Component {
     }
     render() {
         const listado = this.state.data;
+
+        let boxClass = ["box"];
+        if(this.state.addClass) {
+          boxClass.push('green');
+        //   boxClass.push('green');
+        }
+
+        let boxClassE = ["boxE"];
+        if(this.state.addClass) {
+          boxClassE.push('eyes');
+        //   boxClass.push('green');
+        }
+
+
         //console.log(listado);
         return (
             <div className="table-scroll">
