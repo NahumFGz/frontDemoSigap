@@ -40,12 +40,13 @@ class ListarComponentes extends Component {
 
     componentWillMount() {
         let arreglo = [];
+        console.log(this.props.listado);
         const lista = this.props.listado;
         if (lista !== null) {
             lista.map((item, key) => {
                 arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
                     && item.id_ubicacion, item.validado, item.nombre,
-                    item.concepto, item.descripcion,item.sigla_programa ,item.codigo, item.recibo, item.moneda, item.mascara,
+                    item.concepto, item.descripcion,item.sigla_programa,item.codigo, item.recibo, item.moneda,item.id_registro, item.mascara,
                      item.importe, item.fecha, item.dni, item.nombre_programa
                     ));
                 return null;
@@ -86,6 +87,7 @@ class ListarComponentes extends Component {
             .then(res => res.json())
             .then(res => {
                 if (res.status) { // exito
+                console.log(res);
                     let dataTipo = res["data"];
                     this.setState({
                         ubicDato: dataTipo
@@ -130,7 +132,7 @@ class ListarComponentes extends Component {
 
     //crea un objeto para pasar al hijo
     Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto,descripcion,sigla_programa , codigo, recibo,
-        moneda, mascara, importe, fecha, dni, nombre_programa) {
+        moneda,id_registro, mascara, importe, fecha, dni, nombre_programa) {
         this.id_rec = id_rec;
         this.obs = obs;
         this.obs_upg = obs_upg;
@@ -143,6 +145,7 @@ class ListarComponentes extends Component {
         this.codigo = codigo;
         this.recibo = recibo;
         this.moneda = moneda;
+        this.id_registro = id_registro;
         this.mascara = mascara;
         this.importe = importe;
         this.dni = dni;
@@ -241,6 +244,7 @@ class ListarComponentes extends Component {
             }
         }).then(res => res.json())
             .then(res => {
+                console.log(res);
                 if (res.status) {
                     this.setState({
                         obsUpg: res.data
@@ -276,6 +280,8 @@ class ListarComponentes extends Component {
         })
             .then(res => res.json())
             .then(res => {
+                console.log(res);
+
                 if (res.status) { // exito
                     this.setState({
                         isLoading: false
@@ -359,6 +365,7 @@ class ListarComponentes extends Component {
                             <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
+                            <th>Registro</th>
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Ubicación</th>
@@ -378,6 +385,7 @@ class ListarComponentes extends Component {
                             <td>{dynamicData.codigo}</td>
                             <td>{dynamicData.recibo}</td>
                             <td>{dynamicData.moneda}</td>
+                            <td>{dynamicData.id_registro}</td>
                             <td>{dynamicData.mascara} {dynamicData.importe}</td>
                             <td>{dynamicData.fecha}</td>
                             <td><Combo items={this.state.ubicDato} val={this.handleChangeUbic} ubic={dynamicData.ubic}

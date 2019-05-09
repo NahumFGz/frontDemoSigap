@@ -186,9 +186,11 @@ class Content extends Component{
 
            })
                .then((response) => {
+                   console.log(response);
                    return response.json()
                })
                .then(responseJson => {
+                   console.log(responseJson);
                    this.setState({
                        lista: responseJson.data,
                        estado:true,
