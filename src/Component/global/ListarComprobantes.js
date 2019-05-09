@@ -341,6 +341,11 @@ class ListarComponentes extends Component {
         document.getElementById("layer3").style.display="initial";
         document.getElementById("layer4").style.display="initial";
         document.getElementById("layer5").style.display="initial";
+        document.getElementById("reducir1").style.width=10;
+        document.getElementById("reducir2").style.width=10;
+        document.getElementById("reducir3").style.width=10;
+        document.getElementById("reducir4").style.width=10;
+        document.getElementById("reducir5").style.width=10;
     }
     render() {
         const listado = this.state.data;
@@ -350,11 +355,11 @@ class ListarComponentes extends Component {
                 <table className="table table-striped table-bordered table-hover">
                     <thead>
                         <tr className="tabla-cabecera">
-                            <th>Nro</th>
-                            <th>NombresApellidos</th>
-                            <th>Concepto</th>
-                            <th>Descripcion</th>
-                            <th>Sigla Programa</th>
+                            <th id="reducir1">Nro</th>
+                            <th id="reducir2">NombresApellidos</th>
+                            <th id="reducir3">Concepto</th>
+                            <th id="reducir4">Descripcion</th>
+                            <th id="reducir5">Sigla Programa</th>
                             <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
