@@ -31,6 +31,7 @@ class ListarComponentes extends Component {
         this.eventoNombre = this.eventoNombre.bind(this);
 
         this.openModalAsignar = this.openModalAsignar.bind(this);
+        this.show = this.show.bind(this);
         this.state = {
             data: null,
             dataOrdenada: null,
@@ -333,6 +334,10 @@ class ListarComponentes extends Component {
         ReactDOM.render(component, node);
     }
 
+    show(id){
+        obj = document.getElementById(id);
+        console.log(obj);
+    }
     render() {
         const listado = this.state.data;
         //console.log(listado);
@@ -354,11 +359,15 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
-                            <th className="botones">
-                                <button className="btn btn-danger">Ampliar</button>
+                            <th className="boton">
+                                <button onClick={(e) => this.show('layer')} className="btn btn-danger"
+                                >Ampliar</button>
                             </th>
+
                             <th id="layer">
+                                Mostrar Contenido
                             </th>
+                            
 
                         </tr>
                     </thead>
