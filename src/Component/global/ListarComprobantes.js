@@ -409,6 +409,8 @@ class ListarComponentes extends Component {
                                     D
                                 </button>
                             </td>
+                            <td id="layer1">Col 1.1</td>
+                            <td id="layer2">Col 1.2</td>
                         </tr>
                     )}
                     </tbody>
