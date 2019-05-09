@@ -359,6 +359,7 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
+                            <th>Opciones</th>
                             <th id="boton">
                                 <button onClick={(e) => this.show()} className="btn btn-danger"
                                 >Ampliar</button>
@@ -400,7 +401,7 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td className="two-fields" className="botones">
+                            <td className="two-fields">
                                 <button className="btn btn-success btnIzq"
                                      onClick={(e) => this.openModalAsignar()}>
                                      A
