@@ -413,7 +413,7 @@ class ListarComponentes extends Component {
                                 </button>
                             </td>
                             <td  className={boxClass.join(' ')}>
-                                <button className="btn btn-success btnIzq" onClick={(e) => this.openModalAsignar()}>Asignar</button>
+                                <button onClick={(e) => this.openModalAsignar()} className="btn btn-success btnIzq">Asignar</button>
                                 <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
                             </td>
                         </tr>
