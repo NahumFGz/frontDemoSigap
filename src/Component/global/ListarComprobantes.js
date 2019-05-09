@@ -413,8 +413,10 @@ class ListarComponentes extends Component {
                                 </button>
                             </td>
                             <td  className={boxClass.join(' ')}>
-                                <button onClick={(e) => this.openModalAsignar()} className="btn btn-success btnIzq">Asignar</button>
-                                <button className="btn btn-danger">Desasignar</button>
+                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
+                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-primary">
+                                    Asignar
+                                </button>
                             </td>
                         </tr>
                     )}
