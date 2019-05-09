@@ -44,6 +44,7 @@ class ListarComponentes extends Component {
     componentWillMount() {
         let arreglo = [];
         const lista = this.props.listado;
+        console.log(lista);
         if (lista !== null) {
             lista.map((item, key) => {
                 arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
@@ -349,7 +350,7 @@ class ListarComponentes extends Component {
     }
     render() {
         const listado = this.state.data;
-        //console.log(listado);
+        console.log("LISTADOOOOOOOO",listado);
         return (
             <div className="table-scroll">
                 <table className="table table-striped table-bordered table-hover">
