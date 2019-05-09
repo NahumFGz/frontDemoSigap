@@ -231,7 +231,7 @@ class ListarComponentes extends Component {
     }
     openModalUpg(e) {
         let id = e;
-        const url = 'https://modulocontrol.herokuapp.com/recaudaciones/observaciones/' + id;
+        const url = 'https://back-demo-sigap.herokuapp.com/recaudaciones/observaciones/' + id;
         //console.log(url);
         fetch(url, {
             method: 'GET',
