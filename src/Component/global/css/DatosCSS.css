@@ -3,11 +3,11 @@
 }
 
 .botones{
-  display: none;
+  display: initial;
 }
 
 #layer1,#layer2,#layer3,#layer4,#layer5{
-  display: none;
+  display: initial;
 }
 
 .DatosCSS-input-checkbox {
