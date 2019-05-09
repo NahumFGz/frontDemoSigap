@@ -32,7 +32,9 @@ class ListarComponentes extends Component {
             dataOrdenada: null,
             ubicDato: [],
             JSON: [],
-            isLoading: false
+            isLoading: false,
+             // oculto:true,
+             addClass: false
         }
     }
 
@@ -323,11 +325,29 @@ class ListarComponentes extends Component {
         ReactDOM.render(component, node);
     }
 
+    toggle() {
+        this.setState({addClass: !this.state.addClass});
+      }
+
     render() {
         const listado = this.state.data;
         //console.log(listado);
+        let boxClass = ["box"];
+        if(this.state.addClass) {
+          boxClass.push('green');
+        //   boxClass.push('green');
+        }
+
+        let boxClassE = ["boxE"];
+        if(this.state.addClass) {
+          boxClassE.push('eyes');
+        //   boxClass.push('green');
+        }
         return (
             <div className="table-scroll">
+            {/* <button className="btn btn-success btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>  */}
+           {this.state.addClass ? <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar -</button> 
+           : <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>}
                 <table className="table table-striped table-bordered table-hover">
                     <thead>
                         <tr className="tabla-cabecera">
@@ -343,8 +363,8 @@ class ListarComponentes extends Component {
                             <th>Fecha</th>
                             <th>Ubicación</th>
                             <th>Verificar</th>
-                            <th>Observaciones</th>
-                            <th>Asignar/Desagsinar</th>
+                            <th className={boxClassE.join(' ')}>Observaciones</th>
+                            <th className={boxClass.join(' ')}>Asignar/Desagsinar</th>
 
                         </tr>
                     </thead>
@@ -367,7 +387,7 @@ class ListarComponentes extends Component {
                                 <Check validado={dynamicData.validado} id={dynamicData.id_rec}
                                     change={this.handleChangeEstado} />
                             </td>
-                            <td className="two-fields">
+                            <td className={boxClassE.join(' ')}>
                                 <button id={dynamicData.observacion} name={dynamicData.id_rec}
                                     onClick={(e) => this.openModal(dynamicData.id_rec, dynamicData.obs)} className="btn btn-primary">
                                     <span className="mybtn-red glyphicon glyphicon-eye-open"></span>
@@ -377,7 +397,7 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td className="two-fields">
+                            <td  className={boxClass.join(' ')}>
                                 <button className="btn btn-success btnIzq" onClick="handleToAsignar">Asignar</button>
                                 <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
                             </td>

@@ -1,3 +1,14 @@
+
+.table-scroll .btn-more
+{
+  float: right !important;
+  font-weight: bold !important;
+  background: cadetblue !important;
+  color: white !important;
+  font-size: 16px !important;
+  border: none !important;
+}
+
 .the-icons {
   font-size: 25px;
 }
@@ -20,6 +31,34 @@ td{
   color: white;
   background-color: rgb(16, 81, 158);
 }
+
+.box{
+  display: none;
+}
+
+.boxE{
+  display: none;
+}
+
+.box.green{
+  display: table-cell;
+  width:10%;
+}
+
+
+.box.green button {
+  width:50% !important;
+}  
+ 
+
+.boxE.eyes {
+    display:  table-cell;
+  width:10%;
+}
+
+.boxE.eyes button {
+  width:50% !important;
+}  
 
 .table-scroll{
   width: 100%;
@@ -78,3 +117,5 @@ td{
   width:10px;
   background-position:center;
 }*/
+
+ 
