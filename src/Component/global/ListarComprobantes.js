@@ -370,6 +370,9 @@ class ListarComponentes extends Component {
                             </th>
                             <th id="layer1">col1</th>
                             <th id="layer2">col1</th>
+                            <th id="layer3">col1</th>
+                            <th id="layer4">col1</th>
+                            <th id="layer5">col1</th>
 
                         </tr>
                     </thead>
