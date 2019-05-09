@@ -44,7 +44,7 @@ class ListarComponentes extends Component {
         }
     }
 
-    openModalAsignar(){
+    openModalAsignar(e){
         let component = <ModalAsignar />;
         let node = document.createElement('div');
         ReactDOM.render(component, node);
