@@ -334,9 +334,9 @@ class ListarComponentes extends Component {
         ReactDOM.render(component, node);
     }
 
-    show(id){
-        obj = document.getElementById(id);
-        console.log(obj);
+    show(){
+        document.getElementById("boton").style="none";
+        document.getElementById("layer").style="block";
     }
     render() {
         const listado = this.state.data;
@@ -359,8 +359,8 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
-                            <th className="boton">
-                                <button onClick={(e) => this.show('layer')} className="btn btn-danger"
+                            <th id="boton">
+                                <button onClick={(e) => this.show()} className="btn btn-danger"
                                 >Ampliar</button>
                             </th>
 

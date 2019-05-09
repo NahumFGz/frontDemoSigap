@@ -6,6 +6,10 @@
   display: none;
 }
 
+#layer{
+  display: none;
+}
+
 .DatosCSS-input-checkbox {
   width:20px;
   height:17px;
