@@ -355,11 +355,12 @@ class ListarComponentes extends Component {
                 <table className="table table-striped table-bordered table-hover">
                     <thead>
                         <tr className="tabla-cabecera">
-                            <th id="reducir1">Nro</th>
-                            <th id="reducir2">NombresApellidos</th>
-                            <th id="reducir3">Concepto</th>
-                            <th id="reducir4">Descripcion</th>
-                            <th id="reducir5">Sigla Programa</th>
+                            <th>Nro</th>
+                            <th>Registro</th>
+                            <th>NombresApellidos</th>
+                            <th>Concepto</th>
+                            <th>Descripcion</th>
+                            <th>Sigla Programa</th>
                             <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
@@ -369,21 +370,12 @@ class ListarComponentes extends Component {
                             <th>Verificar</th>
                             <th>Observaciones</th>
                             <th>Opciones</th>
-                            <th id="boton">
-                                <button onClick={(e) => this.show()} className="btn btn-danger"
-                                >Ampliar</button>
-                            </th>
-                            <th id="layer1">col1</th>
-                            <th id="layer2">col1</th>
-                            <th id="layer3">col1</th>
-                            <th id="layer4">col1</th>
-                            <th id="layer5">col1</th>
-
                         </tr>
                     </thead>
                     <tbody>{listado.map((dynamicData, i) =>
                         <tr key={i}>
                             <td>{i + 1}</td>
+                            <td>{dynamicData.id_registro}</td>
                             <td onClick={(e) => this.eventoNombre(e)} title="click para ver detalles" className="detalles" id={(dynamicData.codigo === "0") ? (dynamicData.nombre) : (dynamicData.codigo)}>{dynamicData.nombre}</td>
                             <td>{dynamicData.concepto}</td>
                             <td>{dynamicData.descripcion}</td>
@@ -420,11 +412,7 @@ class ListarComponentes extends Component {
                                     D
                                 </button>
                             </td>
-                            <td id="layer1">Col 1.1</td>
-                            <td id="layer2">Col 1.2</td>
-                            <td id="layer3">Col 1.3</td>
-                            <td id="layer4">Col 1.4</td>
-                            <td id="layer5">Col 1.5</td>
+                            
                         </tr>
                     )}
                     </tbody>
