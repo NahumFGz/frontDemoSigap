@@ -357,7 +357,7 @@ class ListarComponentes extends Component {
                             <th className="botones">
                                 <button className="btn btn-danger">Ampliar</button>
                             </th>
-                            <th id="layer" style="display:none;">
+                            <th id="layer">
                             </th>
 
                         </tr>
