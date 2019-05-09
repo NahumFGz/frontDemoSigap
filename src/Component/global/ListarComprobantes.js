@@ -354,8 +354,8 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
-                            //<th>Asignar/Desagsinar</th>
-                            <th className="mostrarDiv">
+                            
+                            <th className="mostrarDiv btn">
                                 <button>Mostrar Divs</button>
                             </th>
                         </tr>
