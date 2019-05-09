@@ -356,6 +356,7 @@ class ListarComponentes extends Component {
                             <th>Concepto</th>
                             <th>Descripcion</th>
                             <th>Programa</th>
+                            <th>Tipo de carga</th>
                             <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
@@ -375,6 +376,7 @@ class ListarComponentes extends Component {
                             <td>{dynamicData.concepto}</td>
                             <td>{dynamicData.descripcion}</td>
                             <td>{dynamicData.sigla_programa}</td>
+                            <td>{dynamicData.id_registro}</td>
                             <td>{dynamicData.codigo}</td>
                             <td>{dynamicData.recibo}</td>
                             <td>{dynamicData.moneda}</td>
