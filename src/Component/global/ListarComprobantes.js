@@ -338,6 +338,9 @@ class ListarComponentes extends Component {
         document.getElementById("boton").style.display="none";
         document.getElementById("layer1").style.display="initial";
         document.getElementById("layer2").style.display="initial";
+        document.getElementById("layer3").style.display="initial";
+        document.getElementById("layer4").style.display="initial";
+        document.getElementById("layer5").style.display="initial";
     }
     render() {
         const listado = this.state.data;
@@ -411,6 +414,9 @@ class ListarComponentes extends Component {
                             </td>
                             <td id="layer1">Col 1.1</td>
                             <td id="layer2">Col 1.2</td>
+                            <td id="layer3">Col 1.3</td>
+                            <td id="layer4">Col 1.4</td>
+                            <td id="layer5">Col 1.5</td>
                         </tr>
                     )}
                     </tbody>
