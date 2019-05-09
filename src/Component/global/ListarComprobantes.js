@@ -335,8 +335,8 @@ class ListarComponentes extends Component {
     }
 
     show(){
-        document.getElementById("boton").style="none";
-        document.getElementById("layer").style="block";
+        document.getElementById("boton").style.display="none";
+        document.getElementById("layer").style.display="block";
     }
     render() {
         const listado = this.state.data;
