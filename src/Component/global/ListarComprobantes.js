@@ -44,7 +44,7 @@ class ListarComponentes extends Component {
         }
     }
 
-    openModalAsignar(e){
+    openModalAsignar(){
         let component = <ModalAsignar />;
         let node = document.createElement('div');
         ReactDOM.render(component, node);
@@ -414,7 +414,7 @@ class ListarComponentes extends Component {
                             </td>
                             <td  className={boxClass.join(' ')}>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.openModalAsignar(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-success">
+                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-success">
                                     Asignar
                                 </button>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
