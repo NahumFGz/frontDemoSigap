@@ -354,10 +354,7 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
-                            
-                            <th className="mostrarDiv btn">
-                                <button>Mostrar Divs</button>
-                            </th>
+                            <button className="btn btn-danger" className="botones">Ampliar</button>
                         </tr>
                     </thead>
                     <tbody>{listado.map((dynamicData, i) =>
