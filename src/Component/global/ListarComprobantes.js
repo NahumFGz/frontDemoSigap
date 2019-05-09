@@ -11,6 +11,8 @@ import './css/bootstrap.css';
 import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
 
+import ModalAsignar from './ModalAsignar';
+
 
 class ListarComponentes extends Component {
     constructor(...props) {
@@ -43,7 +45,7 @@ class ListarComponentes extends Component {
     }
 
     openModalAsignar(){
-         let component = <MyModal />;
+        let component = <ModalAsignar />;
         let node = document.createElement('div');
         ReactDOM.render(component, node);
     }
