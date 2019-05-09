@@ -12,7 +12,6 @@ import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
 
 import ModalAsignarDesasignar from './ModalAsignarDesasignar';
-import logo from '../images/lista.png';
 
 
 class ListarComponentes extends Component {
