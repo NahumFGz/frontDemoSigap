@@ -356,7 +356,7 @@ class ListarComponentes extends Component {
                     <thead>
                         <tr className="tabla-cabecera">
                             <th>Nro</th>
-                            <th>Registro</th>
+                            <th>Tipo de carga</th>
                             <th>NombresApellidos</th>
                             <th>Concepto</th>
                             <th>Descripcion</th>
