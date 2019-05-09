@@ -2,6 +2,11 @@
   font-size: 25px;
 }
 
+.DatosCSS-input-checkbox {
+  width:20px;
+  height:17px;
+}
+
 #layer1,#layer2,#layer3,#layer4,#layer5{
   display: none;
 }
@@ -24,6 +29,78 @@ td{
   color: white;
   background-color: rgb(16, 81, 158);
 }
+
+.table-scroll{
+  width: 100%;
+  margin-top:1.5%;
+  margin-bottom: 1.5%;
+}
+.btn btn-danger{
+  text-align: center;
+}
+.detalles:hover{
+   background-color: #bee5eb;
+  cursor: pointer;
+}
+
+.center-block{
+  display: flex;
+  justify-content: center;
+}
+
+.btn-enviar{
+  background-color:red;
+  color:white;
+  border:none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  text-align: center;
+}
+
+.two-fields {
+  width:10%;
+}
+
+.two-fields button {
+  width:50% !important;
+}
+.mybtn-red{
+  color: red;
+}
+.mybtn-blue{
+  color: blue;
+}
+
+.box{
+  display: none;
+}
+
+.boxE{
+  display: none;
+}
+
+.box.green{
+  display: table-cell;
+  width:10%;
+}
+
+
+.box.green button {
+  width:50% !important;
+}  
+
+.btn-more
+{
+  float: right;
+}
+.boxE.eyes {
+    display:  table-cell;
+  width:10%;
+}
+
+.boxE.eyes button {
+  width:50% !important;
+}  
 
 .table-scroll{
   width: 100%;
