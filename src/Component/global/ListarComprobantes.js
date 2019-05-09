@@ -11,8 +11,6 @@ import './css/bootstrap.css';
 import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
 
-import ModalAsignarDesasignar from './ModalAsignarDesasignar';
-
 
 class ListarComponentes extends Component {
     constructor(...props) {
@@ -29,19 +27,13 @@ class ListarComponentes extends Component {
         this.verificar = this.verificar.bind(this);
         this.groupBy = this.groupBy.bind(this);
         this.eventoNombre = this.eventoNombre.bind(this);
-
-        this.openModalAsignar = this.openModalAsignar.bind(this);
-        this.show = this.show.bind(this);
         this.state = {
-                data: null,
-                dataOrdenada: null,
-                ubicDato: [],
-                JSON: [],
-                isLoading: false,
-                //oculto:true
-                addClass: false
-            }
-            // this.changeBtn = this.changeBtn.bind(this);
+            data: null,
+            dataOrdenada: null,
+            ubicDato: [],
+            JSON: [],
+            isLoading: false
+        }
     }
 
     componentWillMount() {
@@ -49,14 +41,14 @@ class ListarComponentes extends Component {
         const lista = this.props.listado;
         if (lista !== null) {
             lista.map((item, key) => {
-                arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion &&
-                    item.id_ubicacion, item.validado, item.nombre,
-                    item.concepto, item.descripcion, item.sigla_programa, item.codigo, item.recibo, item.moneda, item.mascara,
-                    item.importe, item.fecha, item.dni, item.nombre_programa
-                ));
+                arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
+                    && item.id_ubicacion, item.validado, item.nombre,
+                    item.concepto, item.descripcion,item.sigla_programa ,item.codigo, item.recibo, item.moneda, item.mascara,
+                     item.importe, item.fecha, item.dni, item.nombre_programa
+                    ));
                 return null;
             });
-            const listadoOrdenado = arreglo.sort(function(a, b) {
+            const listadoOrdenado = arreglo.sort(function (a, b) {
                 if (a.nombre > b.nombre) {
                     return 1;
                 }
@@ -68,12 +60,10 @@ class ListarComponentes extends Component {
             });
             //console.log(arreglo);
             this.setState({
-                    data: listadoOrdenado
-                }
-                /*, function () {
-                                console.log("call"+this.state.data)
-                            }*/
-            );
+                data: listadoOrdenado
+            }/*, function () {
+                console.log("call"+this.state.data)
+            }*/);
             this.setState({
                 data: arreglo
             });
@@ -85,12 +75,12 @@ class ListarComponentes extends Component {
         //const url= 'https://api-modulocontrol.herokuapp.com/ubicaciones';
         const url = URL.url.concat('ubicaciones');
         fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                }
-            })
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
             .then(res => res.json())
             .then(res => {
                 if (res.status) { // exito
@@ -137,47 +127,46 @@ class ListarComponentes extends Component {
     }
 
     //crea un objeto para pasar al hijo
-    Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto, descripcion, sigla_programa, codigo, recibo,
-            moneda, mascara, importe, fecha, dni, nombre_programa) {
-            this.id_rec = id_rec;
-            this.obs = obs;
-            this.obs_upg = obs_upg;
-            this.ubic = ubic;
-            this.validado = validado;
-            this.nombre = nombre;
-            this.concepto = concepto;
-            this.descripcion = descripcion;
-            this.sigla_programa = sigla_programa;
-            this.codigo = codigo;
-            this.recibo = recibo;
-            this.moneda = moneda;
-            this.mascara = mascara;
-            this.importe = importe;
-            this.dni = dni;
-            this.nombre_programa = nombre_programa;
-            //console.log(convertDateFormat(fecha.substr(0,10)));
-            if (fecha !== null) {
-                let fTemp = fecha.substr(0, 10).split("-");
-                let tam = fTemp.length,
-                    i = 0,
-                    fFinal = "";
-                for (i = tam - 1; i >= 0; i--) {
-                    fFinal = fFinal + "/" + fTemp[i];
-                }
-                this.fecha = fFinal.slice(1, 11);
-            } else this.fecha = fecha;
+    Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto,descripcion,sigla_programa , codigo, recibo,
+        moneda, mascara, importe, fecha, dni, nombre_programa) {
+        this.id_rec = id_rec;
+        this.obs = obs;
+        this.obs_upg = obs_upg;
+        this.ubic = ubic;
+        this.validado = validado;
+        this.nombre = nombre;
+        this.concepto = concepto;
+        this.descripcion = descripcion;
+        this.sigla_programa = sigla_programa;
+        this.codigo = codigo;
+        this.recibo = recibo;
+        this.moneda = moneda;
+        this.mascara = mascara;
+        this.importe = importe;
+        this.dni = dni;
+        this.nombre_programa = nombre_programa;
+        //console.log(convertDateFormat(fecha.substr(0,10)));
+        if (fecha !== null) {
+            let fTemp = fecha.substr(0, 10).split("-");
+            let tam = fTemp.length, i = 0, fFinal = "";
+            for (i = tam - 1; i >= 0; i--) {
+                fFinal = fFinal + "/" + fTemp[i];
+            }
+            this.fecha = fFinal.slice(1, 11);
         }
-        //recibe las ubicaciones de los archivos
+        else this.fecha = fecha;
+    }
+    //recibe las ubicaciones de los archivos
     handleChangeUbic(ubic, id_rec) {
-            //console.log(ubic);
-            this.state.data.map(items => {
-                if (items.id_rec === id_rec) {
-                    items.ubic = ubic;
-                }
-                return null;
-            });
-        }
-        //recibe el estado de los checks cada vez que se pulsa sobre ellos
+        //console.log(ubic);
+        this.state.data.map(items => {
+            if (items.id_rec === id_rec) {
+                items.ubic = ubic;
+            }
+            return null;
+        });
+    }
+    //recibe el estado de los checks cada vez que se pulsa sobre ellos
     handleChangeEstado(estado, id) {
         const validado = estado.target.checked;
         this.state.data.map(items => {
@@ -198,9 +187,10 @@ class ListarComponentes extends Component {
                     items.observacion = text;
                 }
                 return null;
-            }, {
-                data: prevState.data
-            })
+            },
+                {
+                    data: prevState.data
+                })
         ));
         // console.log(this.state.data);
     }
@@ -212,72 +202,57 @@ class ListarComponentes extends Component {
                     items.obs_upg = text;
                 }
                 return null;
-            }, {
-                data: prevState.data
-            })
+            },
+                {
+                    data: prevState.data
+                })
         ));
         //console.log(this.state.data);
     }
     groupBy(xs, key) {
-            return xs.reduce(function(rv, x) {
-                (rv[x[key]] = rv[x[key]] || []).push(x);
-                return rv;
-            }, {});
-        }
-        // abre el componente MyModal para ingresar observaciones
+        return xs.reduce(function (rv, x) {
+            (rv[x[key]] = rv[x[key]] || []).push(x);
+            return rv;
+        }, {});
+    }
+    // abre el componente MyModal para ingresar observaciones
     openModal(e, o) {
         //https://github.com/xue2han/react-dynamic-modal        
         let id = e;
         let obs = o;
         // console.log(text);
         //let id_re = e.target.name;
-        let component = < MyModal id_rec = { id }
-        obs = { obs }
-        onChange = { this.handleChangeObs_comentarios }
-        estado = { true }
-        />;
+        let component = <MyModal id_rec={id} obs={obs} onChange={this.handleChangeObs_comentarios} estado={true} />;
         let node = document.createElement('div');
         ReactDOM.render(component, node);
 
-    }
-
-    openModalAsignar() {
-        let component = < ModalAsignarDesasignar onChange = { this.handleChangeObs_comentarios }
-        estado = { true }
-        />;
-        let node = document.createElement('div');
-        ReactDOM.render(component, node);
     }
     openModalUpg(e) {
-            let id = e;
-            const url = 'https://modulocontrol.herokuapp.com/recaudaciones/observaciones/' + id;
-            //console.log(url);
-            fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }
-                }).then(res => res.json())
-                .then(res => {
-                    if (res.status) {
-                        this.setState({
-                            obsUpg: res.data
-                        })
-                        let component = < MyModalUpg id_rec = { id }
-                        obs_upg = { res.data }
-                        onChange = { this.handleChangeObs_upg }
-                        estado = { true }
-                        />;
-                        let node = document.createElement('div');
-                        ReactDOM.render(component, node);
-                        //console.log(res);
-                    } else {
-                        alert("FALLÓ OPERACIÓN, ESPERE UN MOMENTO Y VUELVA A INTENTARLO ")
-                    }
-                });
-        }
-        // envia un JSON al server
+        let id = e;
+        const url = 'https://modulocontrol.herokuapp.com/recaudaciones/observaciones/' + id;
+        //console.log(url);
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then(res => res.json())
+            .then(res => {
+                if (res.status) {
+                    this.setState({
+                        obsUpg: res.data
+                    })
+                    let component = <MyModalUpg id_rec={id} obs_upg={res.data} onChange={this.handleChangeObs_upg} estado={true} />;
+                    let node = document.createElement('div');
+                    ReactDOM.render(component, node);
+                    //console.log(res);
+                }else{
+                    alert("FALLÓ OPERACIÓN, ESPERE UN MOMENTO Y VUELVA A INTENTARLO ")
+                }
+            });
+    }
+    // envia un JSON al server
     handleEnviarData() {
         //console.log(this.state.JSON);
         const arreglo = this.verificar();
@@ -290,13 +265,13 @@ class ListarComponentes extends Component {
         });
         fetch(url, {
 
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(arreglo)
-            })
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(arreglo)
+        })
             .then(res => res.json())
             .then(res => {
                 if (res.status) { // exito
@@ -306,8 +281,8 @@ class ListarComponentes extends Component {
                     alert('Datos cargados exitosamente');
                 }
             })
-            // console.log(JSON.stringify(arreglo));
-            //https://github.com/calambrenet/react-table/blob/master/src/react-table.jsx
+        // console.log(JSON.stringify(arreglo));
+        //https://github.com/calambrenet/react-table/blob/master/src/react-table.jsx
     }
     eventoNombre(e) {
 
@@ -317,7 +292,7 @@ class ListarComponentes extends Component {
         var listadoOrdenado;
         //console.log(e.target.innerHTML);
         if (id === nom) {
-            listadoOrdenado = this.state.data.sort(function(a, b) {
+            listadoOrdenado = this.state.data.sort(function (a, b) {
                 if (a.nombre > b.nombre) {
                     return 1;
                 }
@@ -330,7 +305,7 @@ class ListarComponentes extends Component {
             // console.log(listadoOrdenado);
             groupList = this.groupBy(listadoOrdenado, "nombre");
         } else {
-            listadoOrdenado = this.state.data.sort(function(a, b) {
+            listadoOrdenado = this.state.data.sort(function (a, b) {
                 if (a.codigo > b.codigo) {
                     return 1;
                 }
@@ -343,43 +318,16 @@ class ListarComponentes extends Component {
             //  console.log(listadoOrdenado);
             groupList = this.groupBy(listadoOrdenado, "codigo");
         }
-        let component = < Modal2 text = { groupList }
-        nombre = { nom }
-        codigo = { id }
-        estado = { true }
-        />;
+        let component = <Modal2 text={groupList} nombre={nom} codigo={id} estado={true} />;
         let node = document.createElement('div');
         ReactDOM.render(component, node);
     }
 
-    show() {
-        document.getElementById("boton").style.display = "none";
-        document.getElementById("layer1").style.display = "initial";
-        document.getElementById("layer2").style.display = "initial";
-        document.getElementById("layer3").style.display = "initial";
-        document.getElementById("layer4").style.display = "initial";
-        document.getElementById("layer5").style.display = "initial";
-    }
     render() {
         const listado = this.state.data;
-
-        let boxClass = ["box"];
-        if(this.state.addClass) {
-          boxClass.push('green');
-        //   boxClass.push('green');
-        }
-
-        let boxClassE = ["boxE"];
-        if(this.state.addClass) {
-          boxClassE.push('eyes');
-        //   boxClass.push('green');
-        }
-
-
         //console.log(listado);
         return (
             <div className="table-scroll">
-            <button className="btn btn-success btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>
                 <table className="table table-striped table-bordered table-hover">
                     <thead>
                         <tr className="tabla-cabecera">
@@ -395,8 +343,8 @@ class ListarComponentes extends Component {
                             <th>Fecha</th>
                             <th>Ubicación</th>
                             <th>Verificar</th>
-                            <th className={boxClassE.join(' ')}>Observaciones</th>
-                            <th className={boxClass.join(' ')}>Asignar/Desasignar</th>
+                            <th>Observaciones</th>
+                            <th>Asignar/Desagsinar</th>
 
                         </tr>
                     </thead>
@@ -419,7 +367,7 @@ class ListarComponentes extends Component {
                                 <Check validado={dynamicData.validado} id={dynamicData.id_rec}
                                     change={this.handleChangeEstado} />
                             </td>
-                            <td className={boxClassE.join(' ')}>
+                            <td className="two-fields">
                                 <button id={dynamicData.observacion} name={dynamicData.id_rec}
                                     onClick={(e) => this.openModal(dynamicData.id_rec, dynamicData.obs)} className="btn btn-primary">
                                     <span className="mybtn-red glyphicon glyphicon-eye-open"></span>
@@ -429,10 +377,8 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td  className={boxClass.join(' ')}>
-                                {/* <button className="btn btn-success btnIzq" onClick="handleToAsignar" */}
-                                <button className="btn btn-success btnIzq"
-                                onClick={(e) => this.openModal1(dynamicData.id_rec, dynamicData.obs)} >Asignar</button>
+                            <td className="two-fields">
+                                <button className="btn btn-success btnIzq" onClick="handleToAsignar">Asignar</button>
                                 <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
                             </td>
                         </tr>
