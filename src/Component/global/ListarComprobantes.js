@@ -364,7 +364,7 @@ class ListarComponentes extends Component {
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Ubicación</th>
-                            <th className={boxClassE.join(' ')}>Verificar</th>
+                            <th>Verificar</th>
                             <th className={boxClassE.join(' ')}>Observaciones</th>
                             <th className={boxClass.join(' ')}>Asignar/Desagsinar</th>
 
@@ -403,10 +403,6 @@ class ListarComponentes extends Component {
                             <td  className={boxClass.join(' ')}>
                                 <button className="btn btn-success btnIzq" onClick="handleToAsignar">Asignar</button>
                                 <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
-                            </td>
-                            <td  className={boxClass.join(' ')}>
-                                <button className="btn btn-success btnIzq" onClick="handleToAsignar">Verificar</button>
-                                <button className="btn btn-danger" onClick="handleToDesasignar">Verificar</button>
                             </td>
                         </tr>
                     )}
