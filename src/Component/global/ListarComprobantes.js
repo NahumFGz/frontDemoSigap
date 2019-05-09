@@ -354,8 +354,10 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
-                            <th>Asignar/Desagsinar</th>
-
+                            //<th>Asignar/Desagsinar</th>
+                            <th className="mostrarDiv">
+                                <button>Mostrar Divs</button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>{listado.map((dynamicData, i) =>
@@ -387,7 +389,7 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td className="two-fields">
+                            <td className="two-fields" className="botones">
                                 <button className="btn btn-success btnIzq"
                                      onClick={(e) => this.openModalAsignar()}>
                                      A
