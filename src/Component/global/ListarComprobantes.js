@@ -27,6 +27,10 @@ class ListarComponentes extends Component {
         this.verificar = this.verificar.bind(this);
         this.groupBy = this.groupBy.bind(this);
         this.eventoNombre = this.eventoNombre.bind(this);
+
+
+        this.openModalAsignar = this.openModalAsignar.bind(this);
+
         this.state = {
             data: null,
             dataOrdenada: null,
@@ -36,6 +40,12 @@ class ListarComponentes extends Component {
              // oculto:true,
              addClass: false
         }
+    }
+
+    openModalAsignar(){
+         let component = <MyModal />;
+        let node = document.createElement('div');
+        ReactDOM.render(component, node);
     }
 
     componentWillMount() {
@@ -401,7 +411,7 @@ class ListarComponentes extends Component {
                                 </button>
                             </td>
                             <td  className={boxClass.join(' ')}>
-                                <button className="btn btn-success btnIzq" onClick="handleToAsignar">Asignar</button>
+                                <button className="btn btn-success btnIzq" onClick={(e) => this.openModalAsignar()}>Asignar</button>
                                 <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
                             </td>
                         </tr>
