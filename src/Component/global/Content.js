@@ -190,7 +190,7 @@ class Content extends Component{
                })
                .then(responseJson => {
                    this.setState({
-                       lista: responseJson.data,
+                       lista: responseJson.data, //todos los datos
                        estado:true,
                        operacion: (responseJson.data!==null && responseJson.data.length!==0),
                        mensaje:(responseJson.data!==null && responseJson.data.length!==0)?(""):("Datos no encontrados"),

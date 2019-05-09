@@ -40,13 +40,13 @@ class ListarComponentes extends Component {
 
     componentWillMount() {
         let arreglo = [];
-        const lista = this.props.listado;
+        const lista = this.props.listado; //lo pasa de content.js 
         if (lista !== null) {
             lista.map((item, key) => {
                 arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
                     && item.id_ubicacion, item.validado, item.nombre,
                     item.concepto, item.descripcion,item.sigla_programa ,item.codigo, item.recibo, item.moneda, item.mascara,
-                     item.importe, item.fecha, item.dni, item.nombre_programa
+                     item.importe, item.fecha, item.dni, item.nombre_programa, item.id_registro
                     ));
                 return null;
             });
@@ -355,7 +355,7 @@ class ListarComponentes extends Component {
                             <th>Nombre Apellido</th>
                             <th>Concepto</th>
                             <th>Descripcion</th>
-                            <th>Sigla Programa</th>
+                            <th>Programa</th>
                             <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
