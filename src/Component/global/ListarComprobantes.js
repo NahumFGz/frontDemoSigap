@@ -12,6 +12,7 @@ import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
 
 import ModalAsignarDesasignar from './ModalAsignarDesasignar';
+import logo from '../images/lista.png';
 
 
 class ListarComponentes extends Component {
@@ -336,7 +337,8 @@ class ListarComponentes extends Component {
 
     show(){
         document.getElementById("boton").style.display="none";
-        document.getElementById("layer").style.display="block";
+        document.getElementById("layer1").style.display="initial";
+        document.getElementById("layer2").style.display="initial";
     }
     render() {
         const listado = this.state.data;
@@ -364,11 +366,8 @@ class ListarComponentes extends Component {
                                 <button onClick={(e) => this.show()} className="btn btn-danger"
                                 >Ampliar</button>
                             </th>
-
-                            <th id="layer">
-                                Mostrar Contenido
-                            </th>
-                            
+                            <th id="layer1">col1</th>
+                            <th id="layer2">col1</th>
 
                         </tr>
                     </thead>
