@@ -356,6 +356,7 @@ class ListarComponentes extends Component {
                     <thead>
                         <tr className="tabla-cabecera">
                             <th>Nro</th>
+                            <th>Id</th>
                             <th>Tipo de carga</th>
                             <th>NombresApellidos</th>
                             <th>Concepto</th>
@@ -375,6 +376,7 @@ class ListarComponentes extends Component {
                     <tbody>{listado.map((dynamicData, i) =>
                         <tr key={i}>
                             <td>{i + 1}</td>
+                            <td>{dynamicData.id_alum}</td>
                             <td>{dynamicData.id_registro}</td>
                             <td onClick={(e) => this.eventoNombre(e)} title="click para ver detalles" className="detalles" id={(dynamicData.codigo === "0") ? (dynamicData.nombre) : (dynamicData.codigo)}>{dynamicData.nombre}</td>
                             <td>{dynamicData.concepto}</td>
