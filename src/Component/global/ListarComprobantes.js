@@ -40,14 +40,13 @@ class ListarComponentes extends Component {
 
     componentWillMount() {
         let arreglo = [];
-        console.log(this.props.listado);
-        const lista = this.props.listado;
+        const lista = this.props.listado; //lo pasa de content.js 
         if (lista !== null) {
             lista.map((item, key) => {
                 arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
                     && item.id_ubicacion, item.validado, item.nombre,
-                    item.concepto, item.descripcion,item.sigla_programa,item.codigo, item.recibo, item.moneda,item.id_registro, item.mascara,
-                     item.importe, item.fecha, item.dni, item.nombre_programa
+                    item.concepto, item.descripcion,item.sigla_programa ,item.codigo, item.recibo, item.moneda, item.mascara,
+                     item.importe, item.fecha, item.dni, item.nombre_programa, item.id_registro
                     ));
                 return null;
             });
@@ -132,7 +131,7 @@ class ListarComponentes extends Component {
 
     //crea un objeto para pasar al hijo
     Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto,descripcion,sigla_programa , codigo, recibo,
-        moneda,id_registro, mascara, importe, fecha, dni, nombre_programa) {
+        moneda, mascara, importe, fecha, dni, nombre_programa,id_registro) {
         this.id_rec = id_rec;
         this.obs = obs;
         this.obs_upg = obs_upg;
@@ -150,6 +149,7 @@ class ListarComponentes extends Component {
         this.importe = importe;
         this.dni = dni;
         this.nombre_programa = nombre_programa;
+        this.id_registro = id_registro;
         //console.log(convertDateFormat(fecha.substr(0,10)));
         if (fecha !== null) {
             let fTemp = fecha.substr(0, 10).split("-");
@@ -234,7 +234,7 @@ class ListarComponentes extends Component {
     }
     openModalUpg(e) {
         let id = e;
-        const url = 'https://modulocontrol.herokuapp.com/recaudaciones/observaciones/' + id;
+        const url = 'https://back-demo-sigap.herokuapp.com/recaudaciones/observaciones/' + id;
         //console.log(url);
         fetch(url, {
             method: 'GET',
@@ -361,7 +361,8 @@ class ListarComponentes extends Component {
                             <th>Nombre Apellido</th>
                             <th>Concepto</th>
                             <th>Descripcion</th>
-                            <th>Sigla Programa</th>
+                            <th>Programa</th>
+                            <th>Tipo de carga</th>
                             <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
@@ -382,6 +383,7 @@ class ListarComponentes extends Component {
                             <td>{dynamicData.concepto}</td>
                             <td>{dynamicData.descripcion}</td>
                             <td>{dynamicData.sigla_programa}</td>
+                            <td>{dynamicData.id_registro}</td>
                             <td>{dynamicData.codigo}</td>
                             <td>{dynamicData.recibo}</td>
                             <td>{dynamicData.moneda}</td>
