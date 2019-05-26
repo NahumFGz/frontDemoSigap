@@ -11,6 +11,8 @@ import './css/bootstrap.css';
 import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
 
+import ModalAsignar from './ModalAsignar';
+
 
 class ListarComponentes extends Component {
     constructor(...props) {
@@ -27,6 +29,10 @@ class ListarComponentes extends Component {
         this.verificar = this.verificar.bind(this);
         this.groupBy = this.groupBy.bind(this);
         this.eventoNombre = this.eventoNombre.bind(this);
+
+
+        this.openModalAsignar = this.openModalAsignar.bind(this);
+
         this.state = {
             data: null,
             dataOrdenada: null,
@@ -36,6 +42,12 @@ class ListarComponentes extends Component {
              // oculto:true,
              addClass: false
         }
+    }
+
+    openModalAsignar(){
+        let component = <ModalAsignar />;
+        let node = document.createElement('div');
+        ReactDOM.render(component, node);
     }
 
     componentWillMount() {
@@ -361,9 +373,9 @@ class ListarComponentes extends Component {
                             <th>Nombre Apellido</th>
                             <th>Concepto</th>
                             <th>Descripcion</th>
+                            <th>Codigo</th>
                             <th>Programa</th>
                             <th>Tipo de carga</th>
-                            <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
                             <th>Registro</th>
@@ -382,9 +394,9 @@ class ListarComponentes extends Component {
                             <td onClick={(e) => this.eventoNombre(e)} title="click para ver detalles" className="detalles" id={(dynamicData.codigo === "0") ? (dynamicData.nombre) : (dynamicData.codigo)}>{dynamicData.nombre}</td>
                             <td>{dynamicData.concepto}</td>
                             <td>{dynamicData.descripcion}</td>
+                            <td>{dynamicData.codigo}</td>
                             <td>{dynamicData.sigla_programa}</td>
                             <td>{dynamicData.id_registro}</td>
-                            <td>{dynamicData.codigo}</td>
                             <td>{dynamicData.recibo}</td>
                             <td>{dynamicData.moneda}</td>
                             <td>{dynamicData.id_registro}</td>
@@ -408,8 +420,14 @@ class ListarComponentes extends Component {
                                 </button>
                             </td>
                             <td  className={boxClass.join(' ')}>
-                                <button className="btn btn-success btnIzq" onClick="handleToAsignar">Asignar</button>
-                                <button className="btn btn-danger" onClick="handleToDesasignar">Desasignar</button>
+                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
+                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-success">
+                                    Asignar
+                                </button>
+                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
+                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-danger">
+                                    Desasignar
+                                </button>
                             </td>
                         </tr>
                     )}
