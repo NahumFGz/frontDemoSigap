@@ -10,6 +10,7 @@ import './css/DatosCSS.css';
 import './css/bootstrap.css';
 import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
+import swal from 'sweetalert';
 
 import ModalAsignar from './ModalAsignar';
 
@@ -31,24 +32,20 @@ class ListarComponentes extends Component {
         this.eventoNombre = this.eventoNombre.bind(this);
 
 
-        this.openModalAsignar = this.openModalAsignar.bind(this);
-
+        this.asignar_desasignar = this.asignar_desasignar.bind(this);
+        this.desasignarAlumno = this.desasignarAlumno.bind(this);
         this.state = {
             data: null,
             dataOrdenada: null,
             ubicDato: [],
             JSON: [],
             isLoading: false,
-             // oculto:true,
-             addClass: false
+            // oculto:true,
+            addClass: false
         }
     }
 
-    openModalAsignar(){
-        let component = <ModalAsignar />;
-        let node = document.createElement('div');
-        ReactDOM.render(component, node);
-    }
+
 
     componentWillMount() {
         let arreglo = [];
@@ -57,9 +54,9 @@ class ListarComponentes extends Component {
             lista.map((item, key) => {
                 arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
                     && item.id_ubicacion, item.validado, item.nombre,
-                    item.concepto, item.descripcion,item.sigla_programa ,item.codigo, item.recibo, item.moneda, item.mascara,
-                     item.importe, item.fecha, item.dni, item.nombre_programa, item.id_registro
-                    ));
+                    item.concepto, item.descripcion,item.id_programa, item.sigla_programa, item.codigo, item.recibo, item.moneda, item.mascara,
+                    item.importe, item.fecha, item.dni, item.nombre_programa, item.id_registro
+                ));
                 return null;
             });
             const listadoOrdenado = arreglo.sort(function (a, b) {
@@ -98,7 +95,7 @@ class ListarComponentes extends Component {
             .then(res => res.json())
             .then(res => {
                 if (res.status) { // exito
-                console.log(res);
+                    console.log(res);
                     let dataTipo = res["data"];
                     this.setState({
                         ubicDato: dataTipo
@@ -142,8 +139,8 @@ class ListarComponentes extends Component {
     }
 
     //crea un objeto para pasar al hijo
-    Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto,descripcion,sigla_programa , codigo, recibo,
-        moneda, mascara, importe, fecha, dni, nombre_programa,id_registro) {
+    Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto, descripcion,id_programa, sigla_programa, codigo, recibo,
+        moneda, mascara, importe, fecha, dni, nombre_programa, id_registro) {
         this.id_rec = id_rec;
         this.obs = obs;
         this.obs_upg = obs_upg;
@@ -152,6 +149,7 @@ class ListarComponentes extends Component {
         this.nombre = nombre;
         this.concepto = concepto;
         this.descripcion = descripcion;
+        this.id_programa = id_programa;
         this.sigla_programa = sigla_programa;
         this.codigo = codigo;
         this.recibo = recibo;
@@ -244,8 +242,117 @@ class ListarComponentes extends Component {
         ReactDOM.render(component, node);
 
     }
+
+    // ===========================================
+    // MODAL PARA ASIGNAR
+    // ============================================
+
+    desasignarAlumno(programa) {
+        console.log(this.state);
+        swal("Confirmar","¿Esta seguro(a) de desasignar el alumno?",{ icon: "warning",
+        buttons: ['Cancelar', 'Confirmar'],
+        closeOnClickOutside: false})
+        .then((confirm)=>{
+            if(confirm){
+                let url = URL.url.concat("desasignar");
+
+        let codigoAlumno=this.state.alumno[0].codigo;
+        let idAlumno=this.state.alumno[0].id_alum;
+
+                console.log(url);
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({codigoAlumno:codigoAlumno,programa:programa,idAlumno:idAlumno})
+                }).then(res => res.json())
+                    .then(res => {
+                        console.log(res);
+                        if(res.status==='success'){
+                            swal("Alumno desasignado","El alumno fue desasignado exitosamente",{ icon:"success",
+                            closeOnClickOutside: false})
+                            .then((desasigned)=>{
+                                if(desasigned){
+                                   
+                                }
+                            });
+                        }else{
+                            swal("Alumno no desasignado","El alumno no pudo ser desasignado","error");
+                        }
+                    });
+            }
+        });
+    }
+    /*    openModalAsignar(numRecibo){
+           console.log("aaaaaa",numRecibo);
+           let component = <ModalAsignar recibo={numRecibo} estado={true}/>;
+           let node = document.createElement('div');
+           ReactDOM.render(component, node);
+       } */
+
+       asignar_desasignar(numRecibo,codigoAlu,programa,tipo) {
+        let url = URL.url.concat("programas");
+        console.log(url);
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res.status) {
+                    this.setState({
+                        programas: res.data
+                    });
+
+                    let url1 = URL.url.concat("alumnos/" + numRecibo);
+                    console.log(url1);
+                    fetch(url1, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        }
+                    }).then(res => res.json())
+                        .then(res => {
+                            console.log(res);
+                            if (res.status) {
+                                this.setState({
+                                    alumno: res.data
+                                });
+                                console.log(this.state);
+                                if(tipo===1){
+                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo} alumno={this.state.alumno} programas={this.state.programas} estado={true} />;
+                                    let node = document.createElement('div');
+                                    ReactDOM.render(component, node);
+                                }else{
+                                    if(tipo===2){
+                                      this.desasignarAlumno(programa);
+                                    }
+                                }
+                            } else {
+                                console.log("error");
+                            }
+                        });
+
+                } else {
+                    console.log("error");
+                }
+            });
+            console.log(this.state);
+    }
+
+    // ===========================================
+    // MODAL PARA ASIGNAR
+    // ============================================
+
     openModalUpg(e) {
         let id = e;
+        console.log(id);
         const url = 'https://back-demo-sigap.herokuapp.com/recaudaciones/observaciones/' + id;
         //console.log(url);
         fetch(url, {
@@ -265,7 +372,7 @@ class ListarComponentes extends Component {
                     let node = document.createElement('div');
                     ReactDOM.render(component, node);
                     //console.log(res);
-                }else{
+                } else {
                     alert("FALLÓ OPERACIÓN, ESPERE UN MOMENTO Y VUELVA A INTENTARLO ")
                 }
             });
@@ -344,28 +451,28 @@ class ListarComponentes extends Component {
     }
 
     toggle() {
-        this.setState({addClass: !this.state.addClass});
-      }
+        this.setState({ addClass: !this.state.addClass });
+    }
 
     render() {
         const listado = this.state.data;
         //console.log(listado);
         let boxClass = ["box"];
-        if(this.state.addClass) {
-          boxClass.push('green');
-        //   boxClass.push('green');
+        if (this.state.addClass) {
+            boxClass.push('green');
+            //   boxClass.push('green');
         }
 
         let boxClassE = ["boxE"];
-        if(this.state.addClass) {
-          boxClassE.push('eyes');
-        //   boxClass.push('green');
+        if (this.state.addClass) {
+            boxClassE.push('eyes');
+            //   boxClass.push('green');
         }
         return (
             <div className="table-scroll">
-            {/* <button className="btn btn-success btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>  */}
-           {this.state.addClass ? <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar -</button> 
-           : <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>}
+                {/* <button className="btn btn-success btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>  */}
+                {this.state.addClass ? <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar -</button>
+                    : <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>}
                 <table className="table table-striped table-bordered table-hover">
                     <thead>
                         <tr className="tabla-cabecera">
@@ -419,13 +526,13 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td  className={boxClass.join(' ')}>
+                            <td className={boxClass.join(' ')}>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-success">
+                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1)} className="btn btn-success">
                                     Asignar
                                 </button>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-danger">
+                                    onClick={(e) =>this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,2)} className="btn btn-danger">
                                     Desasignar
                                 </button>
                             </td>

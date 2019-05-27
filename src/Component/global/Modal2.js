@@ -175,7 +175,7 @@ class MyModal extends Component {
     }
     //DATA
     listado(){
-      let  lista2=[]
+    //-------------   let  lista2=[]
       let dat2=this.state.dataAlterar
       console.log(dat2);
       for (let m = 0; m<dat2.length; m++) {
@@ -206,7 +206,7 @@ class MyModal extends Component {
     }}}*/
 //Imprimir
 Imprimir(){
-      let data=[]
+    //-------------   let data=[]
       var columnsBenf = ["N°","Concepto","Recibo","Moneda","Importe","Fecha"];
       let  lista=[]
       let dat2=this.state.dataAlterar
@@ -461,7 +461,7 @@ Imprimir(){
                       //  doc.text("TOTAL CANCELADO: S/."+this.sumaTotalSoles,620,first.finalY+25);
                       }
                       if(listadoFinal){
-                      var first = doc.autoTable.previous;
+                       first = doc.autoTable.previous;
                       doc.setFont("helvetica");
                       doc.setFontType("bold");
                       doc.setFontSize(11);
