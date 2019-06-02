@@ -14,8 +14,14 @@ class ModalAsignar extends Component {
         this.texto = React.createRef();
         this.state = {
             modal: false,
-            codigoAlumno:this.props.codigoAlu,
-            programa:this.props.id_programa
+            codigoAlumno: this.props.alumno[0]?this.props.alumno[0].cod_alumno:"",
+            programa: this.props.id_programa,
+            alumno:this.props.alumno,
+            apepat: this.props.alumno[0]?this.props.alumno[0].ape_paterno:"",
+            apemat: this.props.alumno[0]?this.props.alumno[0].ape_materno:"",
+            names: this.props.alumno[0]?this.props.alumno[0].nom_alumno:"",
+            recibo: this.props.recibo?this.props.recibo:"",
+            id_alum: this.props.id_alum
         }
         /*       this.getProgramas();
               this.getDatosAlumno(); */
@@ -23,6 +29,9 @@ class ModalAsignar extends Component {
         this.handleInputIngreso = this.handleInputIngreso.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.asignarAlumno = this.asignarAlumno.bind(this);
+        this.handleInputNames = this.handleInputNames.bind(this);
+        this.handleInputApepat = this.handleInputApepat.bind(this);
+        this.handleInputApemat = this.handleInputApemat.bind(this);
 
     }
 
@@ -93,41 +102,46 @@ class ModalAsignar extends Component {
             });
     }
 
+    /* datosAlumno() {
+        let datosAlumno = [];
+        datosAlumno = this.props.alumno[0] ? this.props.alumno[0].ape_nom.split(" ") : null;
+        console.log(datosAlumno)
+        let apepat = datosAlumno[0];
+        this.setState({ apepatAlu: apepat });
+        let apemat = datosAlumno[1];
+        this.setState({ apematAlu: apemat });
+        let names;
+        for (let i = 0; i < datosAlumno.length; i++) {
+            if (i === 2) {
+                names = datosAlumno[i];
+            } else {
+                if (i > 2) {
+                    names = names + ' ' + datosAlumno[i];
+                }
+            }
+        }
+        console.log(names);
+        this.setState({ nombreAlu: names });
+    }
+     */
+
     asignarAlumno(tipo) {
         if (tipo === 1) {
             console.log(this.props);
             let url = URL.url.concat("asignar");
-            let codigoAlumno = this.state.codigoAlumno;
-            let datosAlumno = [];
-            datosAlumno = this.props.alumno[0] ? this.props.alumno[0].ape_nom.split(" ") : null;
-            console.log(datosAlumno)
-            let apepat = datosAlumno[0];
-            let apemat = datosAlumno[1];
-            let names;
-            for (let i = 0; i < datosAlumno.length; i++) {
-                if (i === 2) {
-                    names = datosAlumno[i];
-                } else {
-                    if (i > 2) {
-                        names = names + ' ' + datosAlumno[i];
-                    }
-                }
-                console.log(names);
-            }
-            console.log(names);
-
-            let ingreso = this.state.ingreso;
+            // let ingreso = this.state.ingreso;
             let programa;
             if (this.state.programa) {
                 programa = this.state.programa;
             } else {
                 programa = this.props.id_programa;
             }
-            let idAlumno = this.props.alumno[0].id_alum;
+            let idAlumno = this.state.id_alum;
 
             console.log(JSON.stringify({
-                codigoAlumno: codigoAlumno, apepat: apepat, apemat: apemat,
-                names: names, ingreso: ingreso, programa: programa, idAlumno: idAlumno
+                codigoAlumno: this.state.codigoAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
+                names: this.state.names,
+                ingreso: null, programa: programa, idAlumno: idAlumno
             }));
             fetch(url, {
                 method: 'POST',
@@ -136,8 +150,9 @@ class ModalAsignar extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    codigoAlumno: codigoAlumno, apepat: apepat, apemat: apemat,
-                    names: names, ingreso: ingreso, programa: programa, idAlumno: idAlumno
+                    codigoAlumno: this.state.codigoAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
+                    names: this.state.names,
+                    ingreso: null, programa: programa, idAlumno: idAlumno
                 })
 
             }).then(res => res.json())
@@ -172,8 +187,9 @@ class ModalAsignar extends Component {
             let idAlumno = this.props.alumno[0].id_alum;
 
             console.log(JSON.stringify({
-                newCodigoAlumno: newCodigoAlumno,oldCodigoAlumno:oldCodigoAlumno, 
-                programa: programa, idAlumno: idAlumno
+                newCodigoAlumno: newCodigoAlumno, oldCodigoAlumno: oldCodigoAlumno,
+                programa: programa, idAlumno: idAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
+                names: this.state.names,
             }));
             fetch(url, {
                 method: 'POST',
@@ -182,8 +198,9 @@ class ModalAsignar extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    newCodigoAlumno: newCodigoAlumno,oldCodigoAlumno:oldCodigoAlumno, 
-                    programa: programa, idAlumno: idAlumno
+                    newCodigoAlumno: newCodigoAlumno, oldCodigoAlumno: oldCodigoAlumno,
+                    programa: programa, idAlumno: idAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
+                    names: this.state.names,
                 })
 
             }).then(res => res.json())
@@ -231,8 +248,7 @@ class ModalAsignar extends Component {
             });
     }
 
-
-    //--------------- FUNCIONES PARA TRAER DATOS DE LA API
+ 
 
     handleInputName(e) {
         this.setState({
@@ -255,14 +271,31 @@ class ModalAsignar extends Component {
         console.log(this.state);
     }
 
+    handleInputNames(e){
+        this.setState({
+            names: e.target.value
+        });
+        console.log(this.state);
+    }
+
+    handleInputApepat(e){
+        this.setState({
+            apepat: e.target.value
+        });
+        console.log(this.state);
+    }
+
+    handleInputApemat(e){
+        this.setState({
+            apemat: e.target.value
+        });
+        console.log(this.state);
+    }
+
     render() {
-        let obs = this.props.recibo;
-        console.log(obs, this.props);
 
         console.log(this.state);
 
-        //const { text } = this.props;
-        //console.log(text);
         const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.close}>&times;</button>;
         return (
             <div>
@@ -271,10 +304,18 @@ class ModalAsignar extends Component {
                         <Label>Asignar</Label>
                     </ModalHeader>
                     <ModalBody>
+                        <Label >Número de recibo:</Label>
+                        <Input value={this.state.recibo} type="text" className="form-control" disabled/>
+                        <Label >Código de alumno:</Label>
                         <Input value={this.state.codigoAlumno} onChange={this.handleInputName} type="text" className="form-control" placeholder="ingrese código del alumno" />
-                        {!this.props.codigoAlu ? <br />:null}
-                        {!this.props.codigoAlu ? <Input value={this.state.ingreso} onChange={this.handleInputIngreso} type="text" className="form-control" placeholder="ingrese año de ingreso" /> : null}
-                        <br />
+                        {/* {!this.props.codigoAlu ? <Label >Año de ingreso:</Label> : null}
+                        {!this.props.codigoAlu ? <Input value={this.state.ingreso} onChange={this.handleInputIngreso} type="text" className="form-control" placeholder="ingrese año de ingreso" /> : null} */}
+                        <Label >Nombres:</Label>
+                        <Input value={this.state.names} type="text" onChange={this.handleInputNames} className="form-control"  placeholder="ingrese mombres"/>
+                        <Label >Apellido paterno:</Label>
+                        <Input value={this.state.apepat} type="text" onChange={this.handleInputApepat} className="form-control" placeholder="ingrese apellido paterno" />
+                        <Label >Apellido materno:</Label>
+                        <Input value={this.state.apemat} type="text" onChange={this.handleInputApemat} className="form-control" placeholder="ingrese apellido materno" />
                         <Label for="exampleSelectMulti">Seleccione programa:</Label>
                         <Input value={this.state.programa} onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
                             {
@@ -284,7 +325,7 @@ class ModalAsignar extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.close}>Cerrar</Button>
-                        <Button color="info" onClick={(e)=>!this.props.codigoAlu ? this.asignarAlumno(1) : this.asignarAlumno(2)}>Asignar</Button>
+                        <Button color="info" onClick={(e) => !this.props.codigoAlu ? this.asignarAlumno(1) : this.asignarAlumno(2)}>Asignar</Button>
                     </ModalFooter>
                 </Modal>
             </div>

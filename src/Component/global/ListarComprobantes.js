@@ -52,7 +52,7 @@ class ListarComponentes extends Component {
         const lista = this.props.listado; //lo pasa de content.js 
         if (lista !== null) {
             lista.map((item, key) => {
-                arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
+                arreglo = arreglo.concat(new this.Obj(item.id_alum,item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
                     && item.id_ubicacion, item.validado, item.nombre,
                     item.concepto, item.descripcion,item.id_programa, item.sigla_programa, item.codigo, item.recibo, item.moneda, item.mascara,
                     item.importe, item.fecha, item.dni, item.nombre_programa, item.id_registro
@@ -139,8 +139,9 @@ class ListarComponentes extends Component {
     }
 
     //crea un objeto para pasar al hijo
-    Obj(id_rec, obs, obs_upg, ubic, validado, nombre, concepto, descripcion,id_programa, sigla_programa, codigo, recibo,
+    Obj(id_alum,id_rec, obs, obs_upg, ubic, validado, nombre, concepto, descripcion,id_programa, sigla_programa, codigo, recibo,
         moneda, mascara, importe, fecha, dni, nombre_programa, id_registro) {
+        this.id_alum = id_alum;
         this.id_rec = id_rec;
         this.obs = obs;
         this.obs_upg = obs_upg;
@@ -292,7 +293,8 @@ class ListarComponentes extends Component {
            ReactDOM.render(component, node);
        } */
 
-       asignar_desasignar(numRecibo,codigoAlu,programa,tipo) {
+       asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum) {
+           console.log(id_alum)
         let url = URL.url.concat("programas");
         console.log(url);
         fetch(url, {
@@ -325,8 +327,11 @@ class ListarComponentes extends Component {
                                     alumno: res.data
                                 });
                                 console.log(this.state);
+
                                 if(tipo===1){
-                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo} alumno={this.state.alumno} programas={this.state.programas} estado={true} />;
+                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo}
+                                     id_alum={id_alum}
+                                     alumno={this.state.alumno} programas={this.state.programas} estado={true} />;
                                     let node = document.createElement('div');
                                     ReactDOM.render(component, node);
                                 }else{
@@ -528,11 +533,11 @@ class ListarComponentes extends Component {
                             </td>
                             <td className={boxClass.join(' ')}>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1)} className="btn btn-success">
+                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum)} className="btn btn-success">
                                     Asignar
                                 </button>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) =>this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,2)} className="btn btn-danger">
+                                    onClick={(e) =>this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,2,dynamicData.id_alum)} className="btn btn-danger">
                                     Desasignar
                                 </button>
                             </td>

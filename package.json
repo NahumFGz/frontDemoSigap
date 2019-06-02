@@ -29,6 +29,7 @@
     "pg-promise": "^8.2.2"
   },
   "devDependencies": {
+    "@angular/cli": "^8.0.1",
     "react-bootstrap": "^0.32.4"
   }
 }
