@@ -4,6 +4,8 @@ import { Modal, ModalFooter, ModalHeader, ModalBody, Button, Label, Input } from
 import './css/bootstrap.css';
 import URL from "./API/API";
 import swal from 'sweetalert';
+import ReactDOM from 'react-dom';
+import Listardatos from './ListarComprobantes';
 
 class ModalAsignar extends Component {
 
@@ -165,6 +167,7 @@ class ModalAsignar extends Component {
                         })
                             .then((asigned) => {
                                 if (asigned) {
+                                    // this.Listardatos.setState({data:[]});
                                     this.close();
                                 }
                             });
@@ -213,7 +216,9 @@ class ModalAsignar extends Component {
                         })
                             .then((asigned) => {
                                 if (asigned) {
+                                    // this.Listardatos.setState({data:[]});
                                     this.close();
+                                    
                                 }
                             });
                     } else {

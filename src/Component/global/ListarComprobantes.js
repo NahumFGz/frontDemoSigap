@@ -5,7 +5,9 @@ import Modal2 from './Modal2';
 import Combo from './Combo';
 import URL from './API/API';
 import Check from './Check';
-import MyModalUpg from './MyModalUpg';
+import MyModalUpg from './MyModalUpg'; 
+import Listardatos from './ListarComprobantes';
+
 import './css/DatosCSS.css';
 import './css/bootstrap.css';
 import './css/bootstrap.min.css';
@@ -276,7 +278,7 @@ class ListarComponentes extends Component {
                             closeOnClickOutside: false})
                             .then((desasigned)=>{
                                 if(desasigned){
-                                   
+                                    // this.Listardatos.setState({data:[]});
                                 }
                             });
                         }else{
