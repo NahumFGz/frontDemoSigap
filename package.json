@@ -1,6 +1,9 @@
 {
   "name": "modulo-controlrecibos",
   "version": "0.1.0",
+  "engines": {
+    "node": "8.9.4"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
