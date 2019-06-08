@@ -250,30 +250,42 @@ class ListarComponentes extends Component {
     // MODAL PARA ASIGNAR
     // ============================================
 
+    //Desasignación de la vista principal Asignar/Desasignar
     desasignarAlumno(programa) {
-        console.log(this.state);
-        swal("Confirmar","¿Esta seguro(a) de desasignar el alumno?",{ icon: "warning",
+        swal("Confirmar","¿Esta seguro(a) de desasignar el(la) alumno(a)?",{ icon: "warning",
         buttons: ['Cancelar', 'Confirmar'],
         closeOnClickOutside: false})
         .then((confirm)=>{
             if(confirm){
-                let url = URL.url.concat("desasignar");
+                let url = URL.url.concat("desasignarRecibo");
 
         let codigoAlumno=this.state.alumno[0].codigo;
         let idAlumno=this.state.alumno[0].id_alum;
+        //Variable recibo
+        let numRecibo=this.state.alumno[0].numero_recibo;
 
-                console.log(url);
                 fetch(url, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({codigoAlumno:codigoAlumno,programa:programa,idAlumno:idAlumno})
+                    body: JSON.stringify({numRecibo:numRecibo})
                 }).then(res => res.json())
                     .then(res => {
                         console.log(res);
                         if(res.status==='success'){
+
+                            /*
+                            /////////////////////////
+                            Al agragar, se tiene q actualizar automáticamente
+                            
+                            //Error
+                            this.data[0].codigo = "312312";
+                            this.data[0].id_programa = "4323232";
+
+                            */
+                            
                             swal("Alumno desasignado","El alumno fue desasignado exitosamente",{ icon:"success",
                             closeOnClickOutside: false})
                             .then((desasigned)=>{
@@ -282,20 +294,14 @@ class ListarComponentes extends Component {
                                 }
                             });
                         }else{
-                            swal("Alumno no desasignado","El alumno no pudo ser desasignado","error");
+                            swal("Alumno(a) no desasignado(a)","El(La) alumno(a) no pudo ser desasignado(a)","error");
                         }
                     });
             }
         });
     }
-    /*    openModalAsignar(numRecibo){
-           console.log("aaaaaa",numRecibo);
-           let component = <ModalAsignar recibo={numRecibo} estado={true}/>;
-           let node = document.createElement('div');
-           ReactDOM.render(component, node);
-       } */
-
-       asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum) {
+   
+       asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto) {
            console.log(id_alum)
         let url = URL.url.concat("programas");
         console.log(url);
@@ -331,8 +337,8 @@ class ListarComponentes extends Component {
                                 console.log(this.state);
 
                                 if(tipo===1){
-                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo}
-                                     id_alum={id_alum}
+                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo} nombre = {nombreCompleto}
+                                     id_alum={id_alum} 
                                      alumno={this.state.alumno} programas={this.state.programas} estado={true} />;
                                     let node = document.createElement('div');
                                     ReactDOM.render(component, node);
@@ -341,6 +347,7 @@ class ListarComponentes extends Component {
                                       this.desasignarAlumno(programa);
                                     }
                                 }
+                                    
                             } else {
                                 console.log("error");
                             }
@@ -535,7 +542,7 @@ class ListarComponentes extends Component {
                             </td>
                             <td className={boxClass.join(' ')}>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum)} className="btn btn-success">
+                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre)} className="btn btn-success">
                                     Asignar
                                 </button>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}

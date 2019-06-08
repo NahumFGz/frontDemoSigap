@@ -23,10 +23,10 @@ class ModalAsignar extends Component {
             apemat: this.props.alumno[0]?this.props.alumno[0].ape_materno:"",
             names: this.props.alumno[0]?this.props.alumno[0].nom_alumno:"",
             recibo: this.props.recibo?this.props.recibo:"",
+            nombreCompleto: this.props.nombre?this.props.nombre:"",
             id_alum: this.props.id_alum
         }
-        /*       this.getProgramas();
-              this.getDatosAlumno(); */
+        
         this.handleInputName = this.handleInputName.bind(this);
         this.handleInputIngreso = this.handleInputIngreso.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
@@ -34,7 +34,7 @@ class ModalAsignar extends Component {
         this.handleInputNames = this.handleInputNames.bind(this);
         this.handleInputApepat = this.handleInputApepat.bind(this);
         this.handleInputApemat = this.handleInputApemat.bind(this);
-
+        this.handleInputDni = this.handleInputDni.bind(this);
     }
 
     componentWillMount() {
@@ -104,29 +104,70 @@ class ModalAsignar extends Component {
             });
     }
 
-    /* datosAlumno() {
-        let datosAlumno = [];
-        datosAlumno = this.props.alumno[0] ? this.props.alumno[0].ape_nom.split(" ") : null;
-        console.log(datosAlumno)
-        let apepat = datosAlumno[0];
-        this.setState({ apepatAlu: apepat });
-        let apemat = datosAlumno[1];
-        this.setState({ apematAlu: apemat });
-        let names;
-        for (let i = 0; i < datosAlumno.length; i++) {
-            if (i === 2) {
-                names = datosAlumno[i];
-            } else {
-                if (i > 2) {
-                    names = names + ' ' + datosAlumno[i];
-                }
-            }
-        }
-        console.log(names);
-        this.setState({ nombreAlu: names });
-    }
-     */
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    //Nuevas funciones para traer datos de la API
+    fnMostrarAsignacionesDisponibles(){
+        console.log(this.props);
+        let url = URL.url.concat("asignacionesDisponibles");
+        //Variables de Json
+        let nombre = (this.state.names).toUpperCase();
+        let app_pat = (this.state.apepat).toUpperCase();
+        let app_mat = (this.state.apemat).toUpperCase();
+        let codigo = this.state.codigoAlumno;
+        let dni = this.state.dni;
 
+        console.log(JSON.stringify({
+            nombre: nombre,
+            app_pat: app_pat,
+            app_mat: app_mat,
+            codigo: codigo,
+            dni: dni
+        }));
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                app_pat: app_pat,
+                app_mat: app_mat,
+                codigo: codigo,
+                dni: dni
+            })
+
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            console.log(res);
+            /**************Al abrir el modal me sale un warn y no puedo mostrar los datos*************/
+            
+            this.setState({
+                listados: res.data //todos los datos
+            });
+            
+        });
+
+    }
+
+    //La ruta para asignar está aqui 
+    //--> router.post('/asignarCodigoPrograma', algrmts.fnAsignarCodigoAlumnoIdPrograma);
+    /*
+    Usa este JSON
+    {
+	"cod_alumno": "12980989",
+	"id_programa": "2",
+	"numero_recibo": "10287706"
+    }
+
+    */
+
+
+    
+    //Funcion de asignación - v.Anterior
     asignarAlumno(tipo) {
         if (tipo === 1) {
             console.log(this.props);
@@ -297,6 +338,14 @@ class ModalAsignar extends Component {
         console.log(this.state);
     }
 
+    handleInputDni(e){
+        this.setState({
+            dni: e.target.value
+        });
+        console.log(this.state);
+    }
+
+
     render() {
 
         console.log(this.state);
@@ -309,6 +358,8 @@ class ModalAsignar extends Component {
                         <Label>Asignar</Label>
                     </ModalHeader>
                     <ModalBody>
+                        <Label >Nombre registrado:</Label>
+                        <Input value={this.state.nombreCompleto} type="text" className="form-control" disabled/>
                         <Label >Número de recibo:</Label>
                         <Input value={this.state.recibo} type="text" className="form-control" disabled/>
                         <Label >Código de alumno:</Label>
@@ -316,16 +367,26 @@ class ModalAsignar extends Component {
                         {/* {!this.props.codigoAlu ? <Label >Año de ingreso:</Label> : null}
                         {!this.props.codigoAlu ? <Input value={this.state.ingreso} onChange={this.handleInputIngreso} type="text" className="form-control" placeholder="ingrese año de ingreso" /> : null} */}
                         <Label >Nombres:</Label>
-                        <Input value={this.state.names} type="text" onChange={this.handleInputNames} className="form-control"  placeholder="ingrese mombres"/>
+                        <Input value={this.state.names} type="text" onChange={this.handleInputNames} className="form-control"  placeholder="ingrese nombres"/>
                         <Label >Apellido paterno:</Label>
-                        <Input value={this.state.apepat} type="text" onChange={this.handleInputApepat} className="form-control" placeholder="ingrese apellido paterno" />
+                        <Input value={this.state.apepat} type="text" onChange={this.handleInputApepat} className="form-control" placeholder="ingrese apellido paternos" />
                         <Label >Apellido materno:</Label>
                         <Input value={this.state.apemat} type="text" onChange={this.handleInputApemat} className="form-control" placeholder="ingrese apellido materno" />
-                        <Label for="exampleSelectMulti">Seleccione programa:</Label>
+                        
+
+                        <Label >DNI:</Label>
+                        <Input value={this.state.dni} type="text" onChange={this.handleInputDni} className="form-control"  placeholder="ingrese el DNI"/>
+                        
+
+                        <Button color="info" onClick={(e) => this.fnMostrarAsignacionesDisponibles()}>Buscar</Button>
+
+
+                        <br></br>
+                        <Label for="exampleSelectMulti">Resultados de busqueda:</Label>                       
                         <Input value={this.state.programa} onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
-                            {
-                                this.props.programas.map(programa => <option value={programa.id_programa} key={programa}> {programa.nom_programa} </option>)
-                            }
+                        {
+                            this.props.programas.map(programa => <option value={programa.id_programa} key={programa}> {programa.nom_programa} </option>)
+                        }
                         </Input>
                     </ModalBody>
                     <ModalFooter>
