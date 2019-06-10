@@ -24,7 +24,8 @@ class ModalAsignar extends Component {
             names: this.props.alumno[0]?this.props.alumno[0].nom_alumno:"",
             recibo: this.props.recibo?this.props.recibo:"",
             nombreCompleto: this.props.nombre?this.props.nombre:"",
-            id_alum: this.props.id_alum
+            id_alum: this.props.id_alum,
+            alumnos:[]
         }
         
         this.handleInputName = this.handleInputName.bind(this);
@@ -146,7 +147,7 @@ class ModalAsignar extends Component {
             /**************Al abrir el modal me sale un warn y no puedo mostrar los datos*************/
             
             this.setState({
-                listados: res.data //todos los datos
+                alumnos: res.data //todos los datos
             });
             
         });
@@ -168,23 +169,12 @@ class ModalAsignar extends Component {
 
     
     //Funcion de asignación - v.Anterior
-    asignarAlumno(tipo) {
-        if (tipo === 1) {
+    asignarAlumno() {
             console.log(this.props);
-            let url = URL.url.concat("asignar");
-            // let ingreso = this.state.ingreso;
-            let programa;
-            if (this.state.programa) {
-                programa = this.state.programa;
-            } else {
-                programa = this.props.id_programa;
-            }
-            let idAlumno = this.state.id_alum;
+            let url = URL.url.concat("asignarCodigoPrograma");
 
             console.log(JSON.stringify({
-                codigoAlumno: this.state.codigoAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
-                names: this.state.names,
-                ingreso: null, programa: programa, idAlumno: idAlumno
+                cod_alumno: this.state.codigoAlumno, id_programa: this.state.programa,numero_recibo:this.state.recibo
             }));
             fetch(url, {
                 method: 'POST',
@@ -193,9 +183,7 @@ class ModalAsignar extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    codigoAlumno: this.state.codigoAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
-                    names: this.state.names,
-                    ingreso: null, programa: programa, idAlumno: idAlumno
+                    cod_alumno: this.state.codigoAlumno, id_programa: this.state.programa,numero_recibo:this.state.recibo
                 })
 
             }).then(res => res.json())
@@ -216,59 +204,7 @@ class ModalAsignar extends Component {
                         swal("Alumno no asignado", "El alumno no pudo ser asignado", "error");
                     }
                 });
-        } else {
-            //SI YA EXISTE UN ALUMNO ASIGNADO
-            console.log(this.props);
-            let url = URL.url.concat("editAsignar");
-            let oldCodigoAlumno = this.props.codigoAlu;
-            let newCodigoAlumno = this.state.codigoAlumno;
-            let programa;
-            if (this.state.programa) {
-                programa = this.state.programa;
-            } else {
-                programa = this.props.id_programa;
-            }
-            let idAlumno = this.props.alumno[0].id_alum;
-
-            console.log(JSON.stringify({
-                newCodigoAlumno: newCodigoAlumno, oldCodigoAlumno: oldCodigoAlumno,
-                programa: programa, idAlumno: idAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
-                names: this.state.names,
-            }));
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    newCodigoAlumno: newCodigoAlumno, oldCodigoAlumno: oldCodigoAlumno,
-                    programa: programa, idAlumno: idAlumno, apepat: this.state.apepat, apemat: this.state.apemat,
-                    names: this.state.names,
-                })
-
-            }).then(res => res.json())
-                .then(res => {
-                    console.log(res);
-                    if (res.status === 'success') {
-                        swal("Alumno asignado", "Los datos del alumno fueron asignados correctamente", {
-                            icon: "success",
-                            closeOnClickOutside: false
-                        })
-                            .then((asigned) => {
-                                if (asigned) {
-                                    // this.Listardatos.setState({data:[]});
-                                    this.close();
-                                    
-                                }
-                            });
-                    } else {
-                        swal("Alumno no asignado", "El alumno no pudo ser asignado", "error");
-                    }
-                });
-
-
-        }
+      
 
     }
 
@@ -304,10 +240,13 @@ class ModalAsignar extends Component {
     }
 
     handleSelect(e) {
+        let telefonos = e.target.value.split("/");
         this.setState({
-            programa: e.target.value
+            codigoAlumno: parseFloat(telefonos[0]),
+            programa: telefonos[1]
         });
         console.log(this.state);
+        console.log(telefonos);
     }
 
     handleInputIngreso(e) {
@@ -382,16 +321,21 @@ class ModalAsignar extends Component {
 
 
                         <br></br>
-                        <Label for="exampleSelectMulti">Resultados de busqueda:</Label>                       
-                        <Input value={this.state.programa} onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
+                    {this.state.alumnos.length>0 ?<Label for="exampleSelectMulti">Resultados de busqueda:</Label>:null}                      
+                       {/*  <Input value={this.state.programa} onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
                         {
                             this.props.programas.map(programa => <option value={programa.id_programa} key={programa}> {programa.nom_programa} </option>)
                         }
-                        </Input>
+                        </Input> */}
+                      {this.state.alumnos.length>0 ?  <Input onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
+                        {
+                            this.state.alumnos.map((alumno,index) => <option value={alumno.ids} key={index}> {alumno.campos_para_asignar} </option>)
+                        }
+                        </Input>:null}
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.close}>Cerrar</Button>
-                        <Button color="info" onClick={(e) => !this.props.codigoAlu ? this.asignarAlumno(1) : this.asignarAlumno(2)}>Asignar</Button>
+                        <Button color="info" onClick={(e) =>  this.asignarAlumno()}>Asignar</Button>
                     </ModalFooter>
                 </Modal>
             </div>
