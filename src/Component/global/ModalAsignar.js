@@ -4,7 +4,7 @@ import { Modal, ModalFooter, ModalHeader, ModalBody, Button, Label, Input } from
 import './css/bootstrap.css';
 import URL from "./API/API";
 import swal from 'sweetalert';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'; 
 import Listardatos from './ListarComprobantes';
 
 class ModalAsignar extends Component {
@@ -55,7 +55,9 @@ class ModalAsignar extends Component {
     close() {
         this.setState({
             modal: false
-        })
+        });
+ 
+        // <Listardatos listado={[]}/>
     }
 
     //--------------- FUNCIONES PARA TRAER DATOS DE LA API
@@ -150,6 +152,14 @@ class ModalAsignar extends Component {
                 alumnos: res.data //todos los datos
             });
             
+            let telefonos = res.data[0].ids.split("/");
+            this.setState({
+                codigoAlumno: telefonos[0],
+                programa: parseFloat(telefonos[1])
+            });
+            console.log(this.state);
+            console.log(telefonos);
+
         });
 
     }
@@ -242,8 +252,8 @@ class ModalAsignar extends Component {
     handleSelect(e) {
         let telefonos = e.target.value.split("/");
         this.setState({
-            codigoAlumno: parseFloat(telefonos[0]),
-            programa: telefonos[1]
+            codigoAlumno: telefonos[0],
+            programa: parseFloat(telefonos[1])
         });
         console.log(this.state);
         console.log(telefonos);
