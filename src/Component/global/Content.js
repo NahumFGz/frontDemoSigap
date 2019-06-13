@@ -51,7 +51,17 @@ class Content extends Component{
            // console.log(this.state.lista);
             switch (this.state.operacion){
                 case "V": contenedor=(<div className="alert alert-info">{this.state.mensaje}</div>);break;
-                case true: contenedor=(<div><Listardatos listado={this.state.lista}/></div>);break;
+                case true: contenedor=(<div><Listardatos listado={this.state.lista}
+                    /* JDLC ADD => DATA TO ListarComprobantes Component */
+                    nombreUpdate   = {this.state.nombre_apellido}
+                    periodoIUpdate = {this.state.dates}
+                    conceptoUpdate = {this.state.concepto}
+                    periodoFUpdate = {this.state.dates2}
+                    voucherUpdate  = {this.state.voucher}
+                    dniUpdate      = {this.state.dni}
+                    codigoUpdate   = {this.state.codigo}
+                    
+                /></div>);break;
                 case false: contenedor=(<div className="alert alert-info">{this.state.mensaje}</div>);break;
                 default: contenedor=(<div></div>);
             }
