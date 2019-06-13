@@ -330,7 +330,7 @@ class ModalAsignar extends Component {
                         <Label>Asignar</Label>
                     </ModalHeader>
                     <ModalBody>
-                        <h5>Datos Registrados:</h5>
+                        <h5>Datos de referencia:</h5>
                         <Label >Nombre registrado:</Label>
                         <Input value={this.state.nombreCompleto} type="text" className="form-control" disabled/>
                         <Label >Número de recibo:</Label>
