@@ -36,18 +36,72 @@ class ListarComponentes extends Component {
 
         this.asignar_desasignar = this.asignar_desasignar.bind(this);
         this.desasignarAlumno = this.desasignarAlumno.bind(this);
+
+        //JDLC ADD => FUNCTION
+        this.updateTable = this.updateTable.bind(this);
+
         this.state = {
-            data: null,
-            dataOrdenada: null,
-            ubicDato: [],
-            JSON: [],
-            isLoading: false,
+            data         : null,
+            dataOrdenada : null,
+            ubicDato     : [],
+            JSON         : [],
+            isLoading    : false,
             // oculto:true,
-            addClass: false
+            addClass     : false,
+
+            //JDLC ADD => STATE
+            rerender     : false
         }
     }
 
+    //JDLC ADD => DIDUPDATE LIFECICLE
+    componentDidUpdate(prevProps, prevState){
+        
+        if(prevState.rerender !== this.state.rerender){
 
+            /*MY NAME IS BIG BOY */
+            let url = URL.url.concat('recaudaciones/detallada/');
+            let arra = {
+               "nombre"     : this.props.nombreUpdate,
+               "periodoI"   : this.props.periodoIUpdate,
+               "id_concepto": this.props.conceptoUpdate,
+               "periodoF"   : this.props.periodoFUpdate,
+               "voucher"    : this.props.voucherUpdate,
+               "dni"        : this.props.dniUpdate,
+               "codigo"     : this.codigoUpdate
+           };
+
+           fetch(url, {
+               method: 'POST',
+               headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+               },
+               body: JSON.stringify(arra, null, 2)
+           })
+               .then((response) => {
+                   console.log(response);
+                   return response.json()
+               })
+               .then(responseJson => {
+                   console.log(responseJson);
+                   let orderedList = responseJson.data.sort((a,b) => {
+                    if (a.nombre > b.nombre) return 1;
+                    
+                    if (a.nombre < b.nombre) return -1;
+                    
+                    return 0;
+                   });
+
+                   this.setState({ data: orderedList });
+               });
+            /*END BIG BOY */
+        }
+    }
+
+    updateTable(){
+        this.setState({rerender: !this.state.rerender});
+    }
 
     componentWillMount() {
         let arreglo = [];
@@ -72,14 +126,19 @@ class ListarComponentes extends Component {
                 return 0;
             });
             //console.log(arreglo);
+            //console.log(listadoOrdenado);
             this.setState({
                 data: listadoOrdenado
             }/*, function () {
                 console.log("call"+this.state.data)
             }*/);
+
+            /* JDLC ADD => COMMENTED 4 TEST
             this.setState({
                 data: arreglo
             });
+            END TEST*/
+
             //console.log( listadoOrdenado );
             /*this.setState({
                dataOrdenada:listadoOrdenado
@@ -275,7 +334,8 @@ class ListarComponentes extends Component {
                     .then(res => {
                         console.log(res);
                         if(res.status==='success'){
-
+                            
+                            
                             /*
                             /////////////////////////
                             Al agragar, se tiene q actualizar automáticamente
@@ -296,12 +356,13 @@ class ListarComponentes extends Component {
                         }else{
                             swal("Alumno(a) no desasignado(a)","El(La) alumno(a) no pudo ser desasignado(a)","error");
                         }
+                        this.updateTable();
                     });
             }
         });
     }
    
-       asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto) {
+        asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto) {
            console.log(id_alum)
         let url = URL.url.concat("programas");
         console.log(url);
@@ -339,7 +400,10 @@ class ListarComponentes extends Component {
                                 if(tipo===1){
                                     let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo} nombre = {nombreCompleto}
                                      id_alum={id_alum} 
-                                     alumno={this.state.alumno} programas={this.state.programas} estado={true} />;
+                                     alumno={this.state.alumno} programas={this.state.programas} estado={true} 
+                                     // JDLC ADD => Funtion trigger as prop
+                                        triggerTableUpdate = {this.updateTable}
+                                     />;
                                     let node = document.createElement('div');
                                     ReactDOM.render(component, node);
                                 }else{
@@ -347,12 +411,10 @@ class ListarComponentes extends Component {
                                       this.desasignarAlumno(programa);
                                     }
                                 }
-                                    
                             } else {
                                 console.log("error");
                             }
                         });
-
                 } else {
                     console.log("error");
                 }
