@@ -213,6 +213,8 @@ class ModalAsignar extends Component {
                     } else {
                         swal("Alumno no asignado", "El alumno no pudo ser asignado", "error");
                     }
+                    // JDLC ADD => Call updateTable
+                    this.props.triggerTableUpdate();
                 });
       
 
@@ -345,7 +347,7 @@ class ModalAsignar extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.close}>Cerrar</Button>
-                        <Button color="info" onClick={(e) =>  this.asignarAlumno()}>Asignar</Button>
+                        <Button id = "triggerUpdateButton" color="info" onClick={(e) =>  this.asignarAlumno()}>Asignar</Button>
                     </ModalFooter>
                 </Modal>
             </div>
