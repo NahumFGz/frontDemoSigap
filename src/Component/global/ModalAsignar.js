@@ -201,7 +201,9 @@ class ModalAsignar extends Component {
             let url = URL.url.concat("asignarCodigoPrograma");
 
             console.log(JSON.stringify({
-                cod_alumno: this.state.codigoAlumno, id_programa: this.state.programa,numero_recibo:this.state.recibo
+                cod_alumno: this.state.codigoAlumno, 
+                id_programa: this.state.programa,
+                numero_recibo:this.state.recibo
             }));
             fetch(url, {
                 method: 'POST',
@@ -210,7 +212,9 @@ class ModalAsignar extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    cod_alumno: this.state.codigoAlumno, id_programa: this.state.programa,numero_recibo:this.state.recibo
+                    cod_alumno: this.state.codigoAlumno, 
+                    id_programa: this.state.programa,
+                    numero_recibo:this.state.recibo
                 })
 
             }).then(res => res.json())
@@ -326,10 +330,13 @@ class ModalAsignar extends Component {
                         <Label>Asignar</Label>
                     </ModalHeader>
                     <ModalBody>
+                        <h5>Datos Registrados:</h5>
                         <Label >Nombre registrado:</Label>
                         <Input value={this.state.nombreCompleto} type="text" className="form-control" disabled/>
                         <Label >Número de recibo:</Label>
                         <Input value={this.state.recibo} type="text" className="form-control" disabled/>
+                        <br></br>
+                        <h5 >Campos de busqueda:</h5>
                         <Label >Código de alumno:</Label>
                         <Input value={this.state.codigoAlumno} onChange={this.handleInputName} type="text" className="form-control" placeholder="ingrese código del alumno" />
                         {/* {!this.props.codigoAlu ? <Label >Año de ingreso:</Label> : null}
