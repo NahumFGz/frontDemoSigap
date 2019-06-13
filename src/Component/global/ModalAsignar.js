@@ -61,6 +61,7 @@ class ModalAsignar extends Component {
     }
 
     //--------------- FUNCIONES PARA TRAER DATOS DE LA API
+    /*
     getProgramas() {
         let url = URL.url.concat("programas");
         console.log(url);
@@ -82,7 +83,8 @@ class ModalAsignar extends Component {
                 }
             });
     }
-
+    */
+    /*
     getDatosAlumno() {
         console.log("ni funciona");
         console.log(this.props);
@@ -106,7 +108,7 @@ class ModalAsignar extends Component {
                 }
             });
     }
-
+    */
     /////////////////////////////////////////////
     /////////////////////////////////////////////
     /////////////////////////////////////////////
@@ -152,14 +154,29 @@ class ModalAsignar extends Component {
                 alumnos: res.data //todos los datos
             });
             
-            let telefonos = res.data[0].ids.split("/"); //res.data[0].ids.split("/")//this.props.alumno[0]?this.props.alumno[0].cod_alumno:"",
+            try {
+                let telefonos = res.data[0].ids.split("/");
+                this.setState({
+                    codigoAlumno: telefonos[0],
+                    programa: parseFloat(telefonos[1])
+                });
+            } catch (error) {
+                swal("Alumno no encontrado", "Datos del alumno no encontrados, intente nuevamente", "error");
+                console.log("No se encuentra la data: ",error);
+            }
+
+            
+
+            //let telefonos = res.data[0].ids.split("/"); //res.data[0].ids.split("/")//this.props.alumno[0]?this.props.alumno[0].cod_alumno:"",
+            
+            /*
             this.setState({
                 codigoAlumno: telefonos[0],
                 programa: parseFloat(telefonos[1])
             });
-            console.log(this.state);
-            console.log(telefonos);
-
+            console.log(this.state, "<------------------------------------");
+            console.log(telefonos,"<***************************") ;
+            */
         });
 
     }

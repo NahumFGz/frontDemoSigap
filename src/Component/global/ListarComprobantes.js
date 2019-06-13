@@ -318,10 +318,12 @@ class ListarComponentes extends Component {
             if(confirm){
                 let url = URL.url.concat("desasignarRecibo");
 
-        let codigoAlumno=this.state.alumno[0].codigo;
-        let idAlumno=this.state.alumno[0].id_alum;
-        //Variable recibo
-        let numRecibo=this.state.alumno[0].numero_recibo;
+        
+                try {
+                    let codigoAlumno=this.state.alumno[0].codigo;
+                    let idAlumno=this.state.alumno[0];
+                    //Variable recibo
+                    let numRecibo=this.state.alumno[0].numero_recibo;
 
                 fetch(url, {
                     method: 'POST',
@@ -334,11 +336,9 @@ class ListarComponentes extends Component {
                     .then(res => {
                         console.log(res);
                         if(res.status==='success'){
-                            
-                            
                             /*
                             /////////////////////////
-                            Al agragar, se tiene q actualizar automáticamente
+                            Al agregar, se tiene q actualizar automáticamente
                             
                             //Error
                             this.data[0].codigo = "312312";
@@ -358,6 +358,11 @@ class ListarComponentes extends Component {
                         }
                         this.updateTable();
                     });
+                } catch (error) {
+                    swal("Alumno(a) desasignado(a)","El(La) alumno(a) ya se encuentra desasignado(a)","error");
+
+                    console.log("Error de asignación de datos: ", error);
+                }
             }
         });
     }
