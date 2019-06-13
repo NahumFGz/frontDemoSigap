@@ -152,7 +152,7 @@ class ModalAsignar extends Component {
                 alumnos: res.data //todos los datos
             });
             
-            let telefonos = ''; //res.data[0].ids.split("/")
+            let telefonos = res.data[0].ids.split("/"); //res.data[0].ids.split("/")//this.props.alumno[0]?this.props.alumno[0].cod_alumno:"",
             this.setState({
                 codigoAlumno: telefonos[0],
                 programa: parseFloat(telefonos[1])
