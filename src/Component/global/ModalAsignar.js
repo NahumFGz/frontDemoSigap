@@ -161,7 +161,7 @@ class ModalAsignar extends Component {
                     programa: parseFloat(telefonos[1])
                 });
             } catch (error) {
-                swal("Alumno no encontrado", "Datos del alumno no encontrados, intente nuevamente", "error");
+                swal("Alumno no encontrado!!!", "Verifique que los datos sean correctos e intente nuevamente", "error");
                 console.log("No se encuentra la data: ",error);
             }
 
