@@ -333,14 +333,10 @@ class ModalAsignar extends Component {
             <div>
                 <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} external={externalCloseBtn}>
                     <div id="principal">
-                        <ModalHeader className="modall">
-                            <div className="campo">
-                                <h2>Asignar</h2>
-                            </div>
-                        </ModalHeader>
+                        
                         <ModalBody>
-                            <div className="left-h3">
-                                <h5 className="reducir">Datos de referencia:</h5>
+                            <div className="modal-centrado">
+                                <h5 className="reducir">Estudiante</h5>
                             </div>
                             <div className="modal-centrado"> 
                                 <Label >Nombre registrado:</Label>
@@ -361,10 +357,10 @@ class ModalAsignar extends Component {
                                         <br></br>
                                     </div>
                                 </InputGroup>
-                                                    <br></br>
+                                                    
                             </div>
 
-                            <div className="left-h3">
+                            <div className="modal-centrado">
                                 <h5 className="reducir"> Campos de busqueda:</h5>
                             </div>
                             <div className="modal-centrado"> 
@@ -383,7 +379,6 @@ class ModalAsignar extends Component {
                                 
                                 </InputGroup>
 
-                                <br></br>
                             </div>
 
                             <div className="modal-centrado">
@@ -419,11 +414,10 @@ class ModalAsignar extends Component {
                                 this.state.alumnos.map((alumno,index) => <option value={alumno.ids} key={index}> {alumno.campos_para_asignar} </option>)
                             }
                             </Input>:null}
+                            
+                            <Button color="secondary" onClick={this.close}>Cerrar</Button>
+                            <Button id = "triggerUpdateButton" color="info" onClick={(e) =>  this.asignarAlumno()}>Asignar</Button>
                         </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.close}>Cerrar</Button>
-                        <Button id = "triggerUpdateButton" color="info" onClick={(e) =>  this.asignarAlumno()}>Asignar</Button>
-                    </ModalFooter>
                     </div>
                 </Modal>
             </div>
