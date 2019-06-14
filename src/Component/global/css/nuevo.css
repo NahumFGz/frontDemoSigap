@@ -1,0 +1,41 @@
+.modal-content {
+  max-height: 1000px;
+  overflow: scroll;
+}
+
+.reducir{
+	margin-top:-15px;
+}
+
+.modall{
+border-bottom: 0px;
+}
+
+#columna{
+	margin-right: 10px;
+}
+
+#principal{
+	text-align: center;
+}
+
+.modal-centrado{
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 10px;
+}
+
+.left-bottom{
+	margin-right: 520px;
+}
+
+.left-h5{
+	margin-right: 480px;
+}	
+
+.left-h3{
+	margin-right: 500px;
+}	
+.campo{
+	margin-left: 33px;
+}		
