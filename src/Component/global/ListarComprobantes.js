@@ -367,7 +367,7 @@ class ListarComponentes extends Component {
         });
     }
    
-        asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto) {
+        asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto, fechaRecibo) {
            console.log(id_alum)
         let url = URL.url.concat("programas");
         console.log(url);
@@ -403,7 +403,7 @@ class ListarComponentes extends Component {
                                 console.log(this.state);
 
                                 if(tipo===1){
-                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo} nombre = {nombreCompleto}
+                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo} nombre = {nombreCompleto} fecha = {fechaRecibo}
                                      id_alum={id_alum} 
                                      alumno={this.state.alumno} programas={this.state.programas} estado={true} 
                                      // JDLC ADD => Funtion trigger as prop
@@ -609,7 +609,7 @@ class ListarComponentes extends Component {
                             </td>
                             <td className={boxClass.join(' ')}>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre)} className="btn btn-success">
+                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha)} className="btn btn-success">
                                     Asignar
                                 </button>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}

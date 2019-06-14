@@ -26,6 +26,7 @@ class ModalAsignar extends Component {
             names: this.props.alumno[0]?this.props.alumno[0].nom_alumno:"",
             recibo: this.props.recibo?this.props.recibo:"",
             nombreCompleto: this.props.nombre?this.props.nombre:"",
+            fechaRecibo: this.props.fecha?this.props.fecha:"",
             id_alum: this.props.id_alum,
             alumnos:[]
         }
@@ -356,8 +357,8 @@ class ModalAsignar extends Component {
 
                                 <div id="columna">
                                     <Label >Fecha de recibo:</Label>
+                                    <Input value={this.state.fechaRecibo}  type="text" className="form-control" disabled/>
                                     <br></br>
-                                    <Input value='0'  type="text" className="form-control" disabled/>
                                 </div>
                             </InputGroup>
                                                 <br></br>
