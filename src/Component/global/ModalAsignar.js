@@ -335,89 +335,87 @@ class ModalAsignar extends Component {
                                 <h2>Asignar</h2>
                             </div>
                         </ModalHeader>
-                    <ModalBody>
-                        
-                        <div className="left-h3">
-                            <h5 className="reducir">Datos de referencia:</h5>
-                        </div>
+                        <ModalBody>
+                            
+                            <div className="left-h3">
+                                <h5 className="reducir">Datos de referencia:</h5>
+                            </div>
 
-                        <div className="modal-centrado"> 
-                            <InputGroup >
-                                <div id="columna">
-                                    <Label >Nombre registrado:</Label>
-                                    <Input value={this.state.nombreCompleto}  type="text" className="form-control" disabled/>
-                                </div>
+                            <div className="modal-centrado"> 
+                                <InputGroup >
+                                    <div id="columna">
+                                        <Label >Nombre registrado:</Label>
+                                        <Input value={this.state.nombreCompleto}  type="text" className="form-control" disabled/>
+                                    </div>
 
-                                <div id="columna">
-                                    <Label >Número de recibo:</Label>
-                                    <br></br>
-                                    <Input value={this.state.recibo}  type="text" className="form-control" disabled/>
-                                    <Label >Fecha de recibo:</Label>
-                                    <Input value={this.state.fechaRecibo}  type="text" className="form-control" disabled/>
-                                    <br></br>
-                                </div>
-                            </InputGroup>
-                                                <br></br>
-                        </div>
+                                    <div id="columna">
+                                        <Label >Número de recibo:</Label>
+                                        <br></br>
+                                        <Input value={this.state.recibo}  type="text" className="form-control" disabled/>
+                                        <Label >Fecha de recibo:</Label>
+                                        <Input value={this.state.fechaRecibo}  type="text" className="form-control" disabled/>
+                                        <br></br>
+                                    </div>
+                                </InputGroup>
+                                                    <br></br>
+                            </div>
 
-                        <div className="left-h5">
-                            <h5 className="reducir">Campos de busqueda:</h5>
-                        </div>
-                        <div className="modal-centrado"> 
+                            <div className="left-h5">
+                                <h5 className="reducir">Campos de busqueda:</h5>
+                            </div>
+                            <div className="modal-centrado"> 
 
-                            <InputGroup>
-                                 <div id="columna">
-                                <Label >Código de alumno:</Label>
-                                <Input value={this.state.codigoAlumno} onChange={this.handleInputName} type="text" className="form-control" placeholder="ingrese código del alumno" />
-                                {/* {!this.props.codigoAlu ? <Label >Año de ingreso:</Label> : null}
-                                {!this.props.codigoAlu ? <Input value={this.state.ingreso} onChange={this.handleInputIngreso} type="text" className="form-control" placeholder="ingrese año de ingreso" /> : null} */}
-                                </div>
-                                <div id="columna">
-                                    <Label >DNI:</Label>
-                                    <Input value={this.state.dni} type="text" onChange={this.handleInputDni} className="form-control"  placeholder="ingrese el DNI"/>
-                                </div>
-                                <div id="columna-boton> 
-                                    <Button>ASIGNADO</Button>
-                                </div>
-                            </InputGroup>
+                                <InputGroup>
+                                     <div id="columna">
+                                    <Label >Código de alumno:</Label>
+                                    <Input value={this.state.codigoAlumno} onChange={this.handleInputName} type="text" className="form-control" placeholder="ingrese código del alumno" />
+                                    {/* {!this.props.codigoAlu ? <Label >Año de ingreso:</Label> : null}
+                                    {!this.props.codigoAlu ? <Input value={this.state.ingreso} onChange={this.handleInputIngreso} type="text" className="form-control" placeholder="ingrese año de ingreso" /> : null} */}
+                                    </div>
+                                    <div id="columna">
+                                        <Label >DNI:</Label>
+                                        <Input value={this.state.dni} type="text" onChange={this.handleInputDni} className="form-control"  placeholder="ingrese el DNI"/>
+                                    </div>
+                                
+                                </InputGroup>
 
-                            <br></br>
-                        </div>
+                                <br></br>
+                            </div>
 
-                        <div className="modal-centrado">
-                            <InputGroup>
-                                <div id="columna">
-                                    <Label >Apellido paterno:</Label>
-                                    <Input value={this.state.apepat} style={{ display:'block'}}  type="text" onChange={this.handleInputApepat} className="form-control" placeholder="ingrese apellido paternos" />
-                                </div>
-                                <div id="columna">
-                                    <Label >Apellido materno:</Label>
-                                    <Input value={this.state.apemat}  type="text" onChange={this.handleInputApemat} className="form-control" placeholder="ingrese apellido materno" />                            
-                                </div>
+                            <div className="modal-centrado">
+                                <InputGroup>
+                                    <div id="columna">
+                                        <Label >Apellido paterno:</Label>
+                                        <Input value={this.state.apepat} style={{ display:'block'}}  type="text" onChange={this.handleInputApepat} className="form-control" placeholder="ingrese apellido paternos" />
+                                    </div>
+                                    <div id="columna">
+                                        <Label >Apellido materno:</Label>
+                                        <Input value={this.state.apemat}  type="text" onChange={this.handleInputApemat} className="form-control" placeholder="ingrese apellido materno" />                            
+                                    </div>
 
-                                <div id="columna">
-                                    <Label >Nombres:</Label>
-                                    <Input value={this.state.names} style={{ display:'block'}} type="text" onChange={this.handleInputNames} className="form-control"  placeholder="ingrese nombres"/>
-                                </div>
-                            </InputGroup>
-                        </div> 
-                        
-                        <div className="left-bottom">
-                           <Button color="info"  onClick={(e) => this.fnMostrarAsignacionesDisponibles()}>Buscar</Button>
-                        </div>
+                                    <div id="columna">
+                                        <Label >Nombres:</Label>
+                                        <Input value={this.state.names} style={{ display:'block'}} type="text" onChange={this.handleInputNames} className="form-control"  placeholder="ingrese nombres"/>
+                                    </div>
+                                </InputGroup>
+                            </div> 
+                            
+                            <div className="left-bottom">
+                               <Button color="info"  onClick={(e) => this.fnMostrarAsignacionesDisponibles()}>Buscar</Button>
+                            </div>
 
-                    {this.state.alumnos.length>0 ?<Label for="exampleSelectMulti">Resultados de busqueda:</Label>:null}                      
-                       {/*  <Input value={this.state.programa} onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
-                        {
-                            this.props.programas.map(programa => <option value={programa.id_programa} key={programa}> {programa.nom_programa} </option>)
-                        }
-                        </Input> */}
-                      {this.state.alumnos.length>0 ?  <Input onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
-                        {
-                            this.state.alumnos.map((alumno,index) => <option value={alumno.ids} key={index}> {alumno.campos_para_asignar} </option>)
-                        }
-                        </Input>:null}
-                    </ModalBody>
+                        {this.state.alumnos.length>0 ?<Label for="exampleSelectMulti">Resultados de busqueda:</Label>:null}                      
+                           {/*  <Input value={this.state.programa} onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
+                            {
+                                this.props.programas.map(programa => <option value={programa.id_programa} key={programa}> {programa.nom_programa} </option>)
+                            }
+                            </Input> */}
+                          {this.state.alumnos.length>0 ?  <Input onChange={this.handleSelect} type="select" name="select" id="exampleSelect">
+                            {
+                                this.state.alumnos.map((alumno,index) => <option value={alumno.ids} key={index}> {alumno.campos_para_asignar} </option>)
+                            }
+                            </Input>:null}
+                        </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.close}>Cerrar</Button>
                         <Button id = "triggerUpdateButton" color="info" onClick={(e) =>  this.asignarAlumno()}>Asignar</Button>
