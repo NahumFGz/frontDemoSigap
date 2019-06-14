@@ -367,7 +367,8 @@ class ListarComponentes extends Component {
         });
     }
    
-        asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto, fechaRecibo) {
+        asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto, fechaRecibo) 
+        {
            console.log(id_alum)
         let url = URL.url.concat("programas");
         console.log(url);
@@ -403,11 +404,19 @@ class ListarComponentes extends Component {
                                 console.log(this.state);
 
                                 if(tipo===1){
-                                    let component = <ModalAsignar codigoAlu={codigoAlu} id_programa={programa?programa:8} recibo={numRecibo} nombre = {nombreCompleto} fecha = {fechaRecibo}
-                                     id_alum={id_alum} 
-                                     alumno={this.state.alumno} programas={this.state.programas} estado={true} 
-                                     // JDLC ADD => Funtion trigger as prop
-                                        triggerTableUpdate = {this.updateTable}
+                                    let component = <ModalAsignar 
+                                    codigoAlu={codigoAlu}
+                                    id_programa={programa?programa:8} 
+                                    recibo={numRecibo} 
+                                    nombre = {nombreCompleto} 
+                                    fecha = {fechaRecibo}
+                                    id_alum={id_alum} 
+                                    alumno={this.state.alumno} 
+                                    programas={this.state.programas} 
+                                    estado={true} 
+                                     
+                                    // JDLC ADD => Funtion trigger as prop
+                                    triggerTableUpdate = {this.updateTable}
                                      />;
                                     let node = document.createElement('div');
                                     ReactDOM.render(component, node);
@@ -589,7 +598,7 @@ class ListarComponentes extends Component {
                             <td>{dynamicData.moneda}</td>
                             <td>{dynamicData.id_registro}</td>
                             <td>{dynamicData.mascara} {dynamicData.importe}</td>
-                            <td>{dynamicData.fecha}</td>
+                            <td>{dynamicData.fecha.substring(0,10)}</td>
                             <td><Combo items={this.state.ubicDato} val={this.handleChangeUbic} ubic={dynamicData.ubic}
                                 id_rec={dynamicData.id_rec} />
                             </td>

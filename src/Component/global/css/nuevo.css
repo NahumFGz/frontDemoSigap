@@ -29,6 +29,7 @@ border-bottom: 0px;
 	padding-right: 50px;
 	padding-top: 10px;
 	margin-bottom: -10px;
+	text-align: left;
 }
 
 .left-bottom{
@@ -42,7 +43,7 @@ border-bottom: 0px;
 .left-h3{
 	margin-right: 500px;
 	text-align: center;
-}	
+}
 .campo{
 	margin-left: 33px;
 }		

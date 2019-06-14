@@ -120,11 +120,14 @@ class ModalAsignar extends Component {
         console.log(this.props);
         let url = URL.url.concat("asignacionesDisponibles");
         //Variables de Json
+        
         let nombre = (this.state.names).toUpperCase();
         let app_pat = (this.state.apepat).toUpperCase();
         let app_mat = (this.state.apemat).toUpperCase();
         let codigo = this.state.codigoAlumno;
         let dni = this.state.dni;
+
+
 
         console.log(JSON.stringify({
             nombre: nombre,
@@ -148,7 +151,7 @@ class ModalAsignar extends Component {
             })
 
         }).then(res => {
-            return res.json();
+                return res.json();
         }).then(res => {
             console.log(res);
             /**************Al abrir el modal me sale un warn y no puedo mostrar los datos*************/
@@ -336,32 +339,33 @@ class ModalAsignar extends Component {
                             </div>
                         </ModalHeader>
                         <ModalBody>
-                            
                             <div className="left-h3">
                                 <h5 className="reducir">Datos de referencia:</h5>
+                            </div>
+                            <div className="modal-centrado"> 
+                                <Label >Nombre registrado:</Label>
+                                <Input value={this.state.nombreCompleto}  type="text" className="form-control" disabled/>
                             </div>
 
                             <div className="modal-centrado"> 
                                 <InputGroup >
                                     <div id="columna">
-                                        <Label >Nombre registrado:</Label>
-                                        <Input value={this.state.nombreCompleto}  type="text" className="form-control" disabled/>
-                                    </div>
-
-                                    <div id="columna">
                                         <Label >Número de recibo:</Label>
                                         <br></br>
                                         <Input value={this.state.recibo}  type="text" className="form-control" disabled/>
+                                        <br></br>
+                                    </div>
+                                    <div id="columna">
                                         <Label >Fecha de recibo:</Label>
-                                        <Input value={this.state.fechaRecibo}  type="text" className="form-control" disabled/>
+                                        <Input value={this.state.fechaRecibo.substring(0,10)}  type="text" className="form-control" disabled/>
                                         <br></br>
                                     </div>
                                 </InputGroup>
                                                     <br></br>
                             </div>
 
-                            <div className="left-h5">
-                                <h5 className="reducir">Campos de busqueda:</h5>
+                            <div className="left-h3">
+                                <h5 className="reducir"> Campos de busqueda:</h5>
                             </div>
                             <div className="modal-centrado"> 
 
