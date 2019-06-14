@@ -380,6 +380,9 @@ class ModalAsignar extends Component {
                                     <Label >DNI:</Label>
                                     <Input value={this.state.dni} type="text" onChange={this.handleInputDni} className="form-control"  placeholder="ingrese el DNI"/>
                                 </div>
+                                <div id="columna"> 
+                                    <Button color="success">ASIGNADO</Button>
+                                </div>
                             </InputGroup>
 
                             <br></br>
@@ -402,7 +405,6 @@ class ModalAsignar extends Component {
                                 </div>
                             </InputGroup>
                         </div> 
-                        <br></br>
                         
                         <div className="left-bottom">
                            <Button color="info"  onClick={(e) => this.fnMostrarAsignacionesDisponibles()}>Buscar</Button>
