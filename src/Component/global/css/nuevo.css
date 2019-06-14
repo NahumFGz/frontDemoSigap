@@ -15,6 +15,11 @@ border-bottom: 0px;
 	margin-right: 10px;
 }
 
+#columna-boton{
+	margin-right: 10px;
+	text-align: right;
+}
+
 #principal{
 	text-align: center;
 }

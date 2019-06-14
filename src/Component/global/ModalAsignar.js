@@ -345,7 +345,6 @@ class ModalAsignar extends Component {
                             <InputGroup >
                                 <div id="columna">
                                     <Label >Nombre registrado:</Label>
-                                    <br></br>
                                     <Input value={this.state.nombreCompleto}  type="text" className="form-control" disabled/>
                                 </div>
 
@@ -353,9 +352,6 @@ class ModalAsignar extends Component {
                                     <Label >Número de recibo:</Label>
                                     <br></br>
                                     <Input value={this.state.recibo}  type="text" className="form-control" disabled/>
-                                </div>
-
-                                <div id="columna">
                                     <Label >Fecha de recibo:</Label>
                                     <Input value={this.state.fechaRecibo}  type="text" className="form-control" disabled/>
                                     <br></br>
@@ -380,7 +376,7 @@ class ModalAsignar extends Component {
                                     <Label >DNI:</Label>
                                     <Input value={this.state.dni} type="text" onChange={this.handleInputDni} className="form-control"  placeholder="ingrese el DNI"/>
                                 </div>
-                                <div id="columna"> 
+                                <div id="columna-boton> 
                                     <Button color="success">ASIGNADO</Button>
                                 </div>
                             </InputGroup>
