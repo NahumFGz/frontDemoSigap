@@ -124,10 +124,8 @@ class ModalAsignar extends Component {
         let nombre = (this.state.names).toUpperCase();
         let app_pat = (this.state.apepat).toUpperCase();
         let app_mat = (this.state.apemat).toUpperCase();
-        let codigo = this.state.codigoAlumno;
+        let codigo = this.state.codigoAlumno?this.state.codigoAlumno:"-";
         let dni = this.state.dni;
-
-
 
         console.log(JSON.stringify({
             nombre: nombre,
@@ -136,6 +134,7 @@ class ModalAsignar extends Component {
             codigo: codigo,
             dni: dni
         }));
+    
         fetch(url, {
             method: 'POST',
             headers: {
