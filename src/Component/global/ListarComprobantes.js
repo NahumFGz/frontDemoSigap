@@ -312,6 +312,11 @@ class ListarComponentes extends Component {
     //Desasignación de la vista principal Asignar/Desasignar
     desasignarAlumno(programa,sigla_programa,codigoAlu) {
 
+        console.log(programa);
+        console.log(sigla_programa);
+        console.log(codigoAlu);
+
+
         if(sigla_programa == "" || sigla_programa == null || codigoAlu == "" || codigoAlu==null){
             swal("Ya esta desasignado!", "Prueba con otro!");
         }else{
