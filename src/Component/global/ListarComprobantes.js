@@ -310,8 +310,12 @@ class ListarComponentes extends Component {
     // ============================================
 
     //Desasignación de la vista principal Asignar/Desasignar
-    desasignarAlumno(programa) {
-        swal("Confirmar","¿Esta seguro(a) de desasignar el(la) alumno(a)?",{ icon: "warning",
+    desasignarAlumno(programa,sigla_programa,codigoAlu) {
+
+        if(sigla_programa == "" || sigla_programa == null || codigoAlu == "" || codigoAlu==null){
+            swal("Ya esta desasignado!", "Prueba con otro!");
+        }else{
+              swal("Confirmar","¿Esta seguro(a) de desasignar el(la) alumno(a)?",{ icon: "warning",
         buttons: ['Cancelar', 'Confirmar'],
         closeOnClickOutside: false})
         .then((confirm)=>{
@@ -365,13 +369,17 @@ class ListarComponentes extends Component {
                 }
             }
         });
+        }
+      
     }
    
-        asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto, fechaRecibo) 
+        asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto, fechaRecibo,sigla_programa) 
         {
            console.log(id_alum)
         let url = URL.url.concat("programas");
         console.log(url);
+
+        if()
         fetch(url, {
             method: 'GET',
             headers: {
@@ -422,7 +430,7 @@ class ListarComponentes extends Component {
                                     ReactDOM.render(component, node);
                                 }else{
                                     if(tipo===2){
-                                      this.desasignarAlumno(programa);
+                                      this.desasignarAlumno(programa,sigla_programa,codigoAlu);
                                     }
                                 }
                             } else {
@@ -618,11 +626,11 @@ class ListarComponentes extends Component {
                             </td>
                             <td className={boxClass.join(' ')}>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha)} className="btn btn-success">
+                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
                                     Asignar
                                 </button>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) =>this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,2,dynamicData.id_alum)} className="btn btn-danger">
+                                    onClick={(e) =>this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,2,dynamicData.id_alum,dynamicData.sigla_programa)} className="btn btn-danger">
                                     Desasignar
                                 </button>
                             </td>
