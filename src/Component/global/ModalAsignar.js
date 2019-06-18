@@ -325,7 +325,7 @@ class ModalAsignar extends Component {
 
     render() {
 
-        console.log(this.state);
+        console.log('Codigo Alumno',this.state.codigoAlumno);
 
         const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.close}>&times;</button>;
         return (

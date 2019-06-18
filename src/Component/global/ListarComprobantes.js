@@ -380,7 +380,7 @@ class ListarComponentes extends Component {
    
         asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto, fechaRecibo,sigla_programa) 
         {
-           console.log(id_alum)
+
         let url = URL.url.concat("programas");
         console.log(url);
 
