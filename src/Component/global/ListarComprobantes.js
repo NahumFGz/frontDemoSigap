@@ -317,7 +317,7 @@ class ListarComponentes extends Component {
         console.log(codigoAlu);
 
 
-        if(sigla_programa == "" || sigla_programa == null || codigoAlu == "" || codigoAlu==null){
+        if(programa == "" || programa == null || codigoAlu == "" || codigoAlu==null){
             swal("Ya esta desasignado!", "Prueba con otro!");
         }else{
               swal("Confirmar","¿Esta seguro(a) de desasignar el(la) alumno(a)?",{ icon: "warning",
