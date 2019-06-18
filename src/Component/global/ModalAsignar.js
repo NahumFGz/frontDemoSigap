@@ -375,7 +375,9 @@ class ModalAsignar extends Component {
                                         <Label >DNI:</Label>
                                         <Input value={this.state.dni} type="text" onChange={this.handleInputDni} className="form-control"  placeholder="ingrese el DNI"/>
                                     </div>
-                                
+                                    <div>
+                                       <Button color="info">ASIGNADO</Button>
+                                    </div>
                                 </InputGroup>
 
                             </div>
