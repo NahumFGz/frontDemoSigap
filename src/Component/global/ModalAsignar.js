@@ -325,7 +325,11 @@ class ModalAsignar extends Component {
 
     render() {
 
-        console.log('Codigo Alumno',this.state.codigoAlumno);
+        console.log('Codigo Alumno',this.state.codigoAlumno.length);
+        let button;
+        if(this.state.codigoAlumno.length>0){
+            button = <Button color="info">ASIGNADO</Button>
+        }
 
         const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.close}>&times;</button>;
         return (
@@ -375,8 +379,8 @@ class ModalAsignar extends Component {
                                         <Label >DNI:</Label>
                                         <Input value={this.state.dni} type="text" onChange={this.handleInputDni} className="form-control"  placeholder="ingrese el DNI"/>
                                     </div>
-                                    <div>
-                                       <Button color="info">ASIGNADO</Button>
+                                    <div id="columna">
+                                        { button }
                                     </div>
                                 </InputGroup>
 
