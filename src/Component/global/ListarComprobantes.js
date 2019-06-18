@@ -384,7 +384,6 @@ class ListarComponentes extends Component {
         let url = URL.url.concat("programas");
         console.log(url);
 
-        if()
         fetch(url, {
             method: 'GET',
             headers: {
