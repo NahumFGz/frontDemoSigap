@@ -318,7 +318,7 @@ class ListarComponentes extends Component {
 
 
         if(programa == "" || programa == null || codigoAlu == "" || codigoAlu==null){
-            swal("Ya esta desasignado!", "Prueba con otro!");
+            swal("Alumno(a) desasignado(a)","El(La) alumno(a) ya se encuentra desasignado(a)","error");
         }else{
               swal("Confirmar","¿Esta seguro(a) de desasignar el(la) alumno(a)?",{ icon: "warning",
         buttons: ['Cancelar', 'Confirmar'],
@@ -603,8 +603,8 @@ class ListarComponentes extends Component {
                             <td onClick={(e) => this.eventoNombre(e)} title="click para ver detalles" className="detalles" id={(dynamicData.codigo === "0") ? (dynamicData.nombre) : (dynamicData.codigo)}>{dynamicData.nombre}</td>
                             <td>{dynamicData.concepto}</td>
                             <td>{dynamicData.descripcion}</td>
-                            <td>{dynamicData.codigo===null || dynamicData.codigo==='' ? '--' : dynamicData.codigo}</td>
-                            <td>{dynamicData.sigla_programa===null || dynamicData.sigla_programa===''?'--':dynamicData.sigla_programa}</td>
+                            <td>{dynamicData.codigo===null || dynamicData.codigo==='' ? '' : dynamicData.codigo}</td>
+                            <td>{dynamicData.sigla_programa===null || dynamicData.sigla_programa===''?'':dynamicData.sigla_programa}</td>
                             <td>{dynamicData.id_registro}</td>
                             <td>{dynamicData.recibo}</td>
                             <td>{dynamicData.moneda}</td>

@@ -202,14 +202,20 @@ class ModalAsignar extends Component {
     
     //Funcion de asignación - v.Anterior
     asignarAlumno() {
-            console.log(this.props);
+            if(this.state.codigoAlumno != ""){
+                console.log(this.props);
             let url = URL.url.concat("asignarCodigoPrograma");
 
+
+            console.log("-------------------------");
             console.log(JSON.stringify({
                 cod_alumno: this.state.codigoAlumno, 
                 id_programa: this.state.programa,
                 numero_recibo:this.state.recibo
             }));
+
+            console.log("-------------------------");
+            
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -242,6 +248,9 @@ class ModalAsignar extends Component {
                     // JDLC ADD => Call updateTable
                     this.props.triggerTableUpdate();
                 });
+            }else{
+                swal("Busque el alumno antes de asignar", "Código y/o programa no seleccionados - Intente nuevamente", "error");
+            }
       
 
     }
@@ -328,7 +337,7 @@ class ModalAsignar extends Component {
         console.log('Codigo Alumno',this.state.codigoAlumno.length);
         let button;
         if(this.state.codigoAlumno.length>0){
-            button = <Button color="info">ASIGNADO</Button>
+            button = <Button color="success">ASIGNADO</Button>
         }
 
         const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.close}>&times;</button>;
