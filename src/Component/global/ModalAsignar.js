@@ -27,6 +27,7 @@ class ModalAsignar extends Component {
             recibo: this.props.recibo?this.props.recibo:"",
             nombreCompleto: this.props.nombre?this.props.nombre:"",
             fechaRecibo: this.props.fecha?this.props.fecha:"",
+            sigla_programa: this.props.siglaPrograma?this.props.siglaPrograma:"",
             id_alum: this.props.id_alum,
             alumnos:[]
         }
@@ -334,7 +335,7 @@ class ModalAsignar extends Component {
 
     render() {
 
-        console.log('Codigo Alumno',this.state.codigoAlumno.length);
+        console.log('--------> ',this.state.sigla_programa);
         let button;
         if(this.state.codigoAlumno.length>0){
             button = <Button color="success">ASIGNADO</Button>
@@ -348,7 +349,8 @@ class ModalAsignar extends Component {
                         
                         <ModalBody>
                             <div className="modal-centrado">
-                                <h5 className="reducir">Estudiante</h5>
+                                <h4 className="reducir">Estudiante </h4>
+                                <h6 className="reducir-dos">Codigo: {this.state.codigoAlumno} Sigla Programa: {this.state.sigla_programa}</h6>
                             </div>
                             <div className="modal-centrado"> 
                                 <Label >Nombre registrado:</Label>

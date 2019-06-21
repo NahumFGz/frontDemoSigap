@@ -381,6 +381,7 @@ class ListarComponentes extends Component {
         asignar_desasignar(numRecibo,codigoAlu,programa,tipo,id_alum,nombreCompleto, fechaRecibo,sigla_programa) 
         {
 
+        console.log("*********", sigla_programa);
         let url = URL.url.concat("programas");
         console.log(url);
 
@@ -423,8 +424,9 @@ class ListarComponentes extends Component {
                                     nombre = {nombreCompleto} 
                                     fecha = {fechaRecibo}
                                     id_alum={id_alum} 
+                                    siglaPrograma = {sigla_programa}
                                     alumno={this.state.alumno} 
-                                    programas={this.state.programas} 
+                                    programas={this.state.programas}
                                     estado={true} 
                                      
                                     // JDLC ADD => Funtion trigger as prop
