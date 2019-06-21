@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalFooter, ModalHeader, ModalBody, Button, Label, Input,InputGroup } from 'reactstrap';
+import { Modal, ModalFooter, ModalHeader, ModalBody, Button, Label, Input,InputGroup,InputGroupAddon,InputGroupText } from 'reactstrap';
 //import {Modal,ModalManager,Effect} from 'react-dynamic-modal';
 import './css/bootstrap.css';
 import URL from "./API/API";
@@ -350,11 +350,28 @@ class ModalAsignar extends Component {
                         <ModalBody>
                             <div className="modal-centrado">
                                 <h4 className="reducir">Estudiante </h4>
-                                <h6 className="reducir-dos">Codigo: {this.state.codigoAlumno} Sigla Programa: {this.state.sigla_programa}</h6>
+                                <div id="separar" >
+                                    <InputGroup id="separar2">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>Codigo</InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input disabled value={this.state.codigoAlumno}/>
+                                    </InputGroup>
+                                </div>
+                               <div id="separar">
+                                    <InputGroup>
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>Programa</InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input disabled value={this.state.sigla_programa}/>
+                                    </InputGroup>
+                               </div>
                             </div>
+                            
+
                             <div className="modal-centrado"> 
-                                <Label >Nombre registrado:</Label>
-                                <Input value={this.state.nombreCompleto}  type="text" className="form-control" disabled/>
+                                <Label >Nombre:</Label>
+                                <Input value={this.state.nombreCompleto} type="text" className="form-control" disabled/>
                             </div>
 
                             <div className="modal-centrado"> 
