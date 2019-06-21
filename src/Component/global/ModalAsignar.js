@@ -338,7 +338,7 @@ class ModalAsignar extends Component {
         console.log('--------> ',this.state.sigla_programa);
         let button;
         if(this.state.codigoAlumno.length>0){
-            button = <Button color="success">ASIGNADO</Button>
+            button = <Button color="success" id="btnAsignar">ASIGNADO</Button>
         }
 
         const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.close}>&times;</button>;
