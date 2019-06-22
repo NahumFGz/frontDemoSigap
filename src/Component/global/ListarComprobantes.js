@@ -596,11 +596,12 @@ class ListarComponentes extends Component {
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Ubicación</th>
-                            <th>Verificar</th>
-                            <th>Observaciones</th>
-                            <th>Asignar/Desagsinar</th>
+                            <th className={this.state.expand ? "" : "d-none"}>Verificar</th>
                             <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
                             <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
+                            <th>Observaciones</th>
+                            <th >Asignar/Desasignar</th>
+                            
                         </tr>
                     </thead>
                     <tbody>{listado.map((dynamicData, i) =>
@@ -623,7 +624,7 @@ class ListarComponentes extends Component {
                                     id_rec={dynamicData.id_rec}
                                 />
                             </td>
-                            <td>
+                            <td className={this.state.expand ? "" : "d-none"}>
                                 <Check
                                     validado={dynamicData.validado}
                                     id={dynamicData.id_rec}
@@ -631,7 +632,9 @@ class ListarComponentes extends Component {
                                     disabled={true}
                                 />
                             </td>
-                            <td className="two-fields">
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
+                            <td className="two-obs">
                                 <button id={dynamicData.observacion} name={dynamicData.id_rec}
                                     onClick={(e) => this.openModal(dynamicData.id_rec, dynamicData.obs)} className="btn btn-primary">
                                     <span className="mybtn-red glyphicon glyphicon-eye-open"></span>
@@ -641,7 +644,7 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td>
+                            <td className="two-fields">
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
                                     onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
                                     Asignar
@@ -651,8 +654,7 @@ class ListarComponentes extends Component {
                                     Desasignar
                                 </button>
                             </td>
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
+                            
                         </tr>
                     )}
                     </tbody>

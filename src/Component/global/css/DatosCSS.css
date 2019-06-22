@@ -93,6 +93,14 @@ td{
   text-align: center;
 }
 
+.two-obs {
+  width:10%;
+}
+
+.two-obs button {
+  width:35% !important;
+}
+
 .two-fields {
   width:10%;
 }
@@ -100,6 +108,7 @@ td{
 .two-fields button {
   width:50% !important;
 }
+
 .mybtn-red{
   color: red;
 }
