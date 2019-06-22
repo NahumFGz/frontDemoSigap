@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { Modal, ModalFooter, ModalHeader, ModalBody, Button, Label, Input } from 'reactstrap';
 //import { ModalManager } from 'react-dynamic-modal';
 import './css/bootstrap.css';
+import URL from "./API/API";
 
 class MyModal extends Component {
 
     //constructor(){}
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handlerGuardar = this.handlerGuardar.bind(this);
         this.close = this.close.bind(this);
         this.texto = React.createRef();
         this.state = {
-            data: null,
             modal: false
         }
     }
@@ -25,7 +25,9 @@ class MyModal extends Component {
         var data = {};
         data.idrecaudacion = this.props.id_rec;
         data.mensaje = document.getElementById("mensaje").value;
-        const url = 'https://modulocontrol.herokuapp.com/recaudaciones/observaciones';
+        const url =
+            //'https://modulocontrol.herokuapp.com/recaudaciones/observaciones';
+            URL.url.concat("recaudaciones/observaciones");
         //console.log(JSON.stringify(data));
         fetch(url, {
             method: 'PUT',

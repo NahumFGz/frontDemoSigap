@@ -196,13 +196,13 @@ class Content extends Component{
 
            })
                .then((response) => {
-                   console.log(response);
+                console.log(response);
                    return response.json()
+
                })
                .then(responseJson => {
-                   console.log(responseJson);
                    this.setState({
-                       lista: responseJson.data, //todos los datos
+                       lista: responseJson.data, //Todos los datos
                        estado:true,
                        operacion: (responseJson.data!==null && responseJson.data.length!==0),
                        mensaje:(responseJson.data!==null && responseJson.data.length!==0)?(""):("Datos no encontrados"),

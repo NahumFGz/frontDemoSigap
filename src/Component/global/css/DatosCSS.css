@@ -17,11 +17,17 @@
   width:20px;
   height:17px;
 }
-td{
-  height: auto;
+
+th{
+  height: 85px;
 }
+
+td{
+  height: 95px;
+}
+
 .tabla{
-  width: 95%;
+  width: 100%;
   height:auto;
   overflow:auto;
   margin: auto;
@@ -100,6 +106,16 @@ td{
 .mybtn-blue{
   color: blue;
 }
+
+.contenedor-flex{
+  display: flex;
+  width: 20%;
+  margin-top: -3%;
+}
+
+.flex-sb{
+  justify-content: space-between;
+}
 /*
 .two-fields {
   width:8%;
@@ -117,5 +133,3 @@ td{
   width:10px;
   background-position:center;
 }*/
-
- 

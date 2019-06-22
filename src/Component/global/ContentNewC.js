@@ -194,7 +194,7 @@ class Content extends Component {
                 : "Datos no encontrados",
             isLoading: false
           });
-          console.log(responseJson.data);
+          console.log(responseJson.data); //Ver datos
         });
     }
   }

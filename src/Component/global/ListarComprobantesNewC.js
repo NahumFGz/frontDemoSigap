@@ -31,20 +31,22 @@ class ListarComponentes extends Component {
     this.handleChangeEstado = this.handleChangeEstado.bind(this);
     this.crearJSON = this.crearJSON.bind(this);
     this.verificar = this.verificar.bind(this);
+    this.expandirTabla = this.expandirTabla.bind(this);
     this.state = {
       data: null,
       JSON: [],
       ubicDato: [],
       tipoDato: [],
       isLoading: false,
-      isNew: false
+      isNew: false,
+      expand: false
     };
+
   }
 
   componentWillMount() {
     let arreglo = [];
     const lista = this.props.listado;
-    console.log(lista);
     if (lista !== null) {
       lista.map((item, key) => {
         arreglo = arreglo.concat(
@@ -53,13 +55,14 @@ class ListarComponentes extends Component {
             item.observacion,
             item.observacion_upg,
             item.id_ubicacion && item.id_ubicacion,
-            item.id_tipo,
+            item.tipo,
             item.validado,
             item.nombre,
             item.concepto,
-            item.descripcion,
+            item.descripcion_min,
             item.sigla_programa,
             item.id_programa,
+            item.id_registro,
             item.codigo,
             item.recibo,
             item.moneda,
@@ -71,7 +74,6 @@ class ListarComponentes extends Component {
         );
         return null;
       });
-      console.log(arreglo);
       this.setState(
         {
           data: arreglo
@@ -80,7 +82,7 @@ class ListarComponentes extends Component {
             }*/
       );
     }
-    //console.log(arreglo);
+    console.log(arreglo);
     //const url= 'https://api-modulocontrol.herokuapp.com/ubicaciones';
     const url = URL.url.concat("ubicaciones");
     fetch(url, {
@@ -213,9 +215,10 @@ class ListarComponentes extends Component {
     validado,
     nombre,
     concepto,
-    descripcion,
+    descripcion_min,
     sigla_programa,
     id_programa,
+    id_registro,
     codigo,
     recibo,
     moneda,
@@ -232,9 +235,10 @@ class ListarComponentes extends Component {
     this.validado = validado;
     this.nombre = nombre;
     this.concepto = concepto;
-    this.descripcion = descripcion;
+    this.descripcion_min = descripcion_min;
     this.sigla_programa = sigla_programa;
     this.id_programa = id_programa;
+    this.id_registro = id_registro;
     this.codigo = codigo;
     this.recibo = recibo;
     this.moneda = moneda;
@@ -312,7 +316,7 @@ class ListarComponentes extends Component {
     );
   }
   groupBy(xs, key) {
-    return xs.reduce(function(rv, x) {
+    return xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
       return rv;
     }, {});
@@ -338,7 +342,8 @@ class ListarComponentes extends Component {
   openModalUpg(e) {
     let id = e;
     const url =
-      "https://modulocontrol.herokuapp.com/recaudaciones/observaciones/" + id;
+      //"https://modulocontrol.herokuapp.com/recaudaciones/observaciones/" + id;
+      URL.url.concat("recaudaciones/observaciones/" + id);
     //console.log(url);
     fetch(url, {
       method: "GET",
@@ -357,7 +362,7 @@ class ListarComponentes extends Component {
             <MyModalUpg
               id_rec={id}
               obs_upg={res.data}
-              onChange={this.handleChangeObs_upg}
+              change={this.handleChangeObs_upg}
               estado={true}
             />
           );
@@ -409,6 +414,37 @@ class ListarComponentes extends Component {
     let cod = c;
     let sig = d;
     let idp = b;
+    if(cod!=null){
+      ModalManager.open(
+        <Modal2
+          id={id_alum}
+          nombre={nom}
+          codigo={cod}
+          sigla={sig}
+          idPrograma={idp}
+        />
+      );
+    }
+    
+  }
+
+  expandirTabla(e) {
+    if (!this.state.expand) {
+      this.setState({ expand: true });
+      e.target.innerHTML = "VER MENOS";
+    } else {
+      this.setState({ expand: false });
+      e.target.innerHTML = "VER MÁS";
+    }
+    console.log(this.state.expand);
+  }
+
+  eventoNombre(e, f, c, d, b) {
+    let id_alum = e;
+    let nom = f;
+    let cod = c;
+    let sig = d;
+    let idp = b;
     ModalManager.open(
       <Modal2
         id={id_alum}
@@ -435,17 +471,12 @@ class ListarComponentes extends Component {
           <div className="botones">
             {/* <div className="container">
                             <button id="btnNuevaR"  onClick={this.handleNuevo} className="btn btn-outline-success">Nueva</button>
-                        </div> */}
-            <div className={this.state.isNew ? "block" : "none"}>
-              <button
-                id="Registrar"
-                onClick={this.handleEnviarData}
-                className="btn btn-outline-success"
-              >
-                Registrar
-              </button>
+                        </div> */}           
+            <div className="contenedor-flex flex-sb">
+              <div>
+                <button className="btn btn-outline-primary" onClick={e => this.expandirTabla(e)}>VER MÁS</button>
+              </div>
             </div>
-            <p> </p>
           </div>
           <table
             className="tabla table-striped table-bordered table-hover"
@@ -456,17 +487,18 @@ class ListarComponentes extends Component {
                 <th>Nro</th>
                 <th>Nombre Apellido</th>
                 <th>Concepto</th>
-                <th>Descripcion</th>
+                <th >Descripcion</th>
                 <th>Codigo</th>
-                <th>Sigla Programa</th>
+                <th>Programa</th>
                 <th>Recibo</th>
                 <th>Moneda</th>
                 <th>Importe</th>
                 <th>Fecha</th>
-                <th>Ubicación</th>
-                <th>Tipo</th>
-                <th>Verificar</th>
-                <th>Observaciones</th>
+                <th className={this.state.expand ? "" : "d-none"}>Ubicación</th>
+                <th className={this.state.expand ? "" : "d-none"}>Verificar</th>
+                <th className={this.state.expand ? "" : "d-none"}>Observaciones</th>
+                <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
+                <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
               </tr>
             </thead>
             <tbody id="table">
@@ -490,7 +522,7 @@ class ListarComponentes extends Component {
                     {dynamicData.nombre}
                   </td>
                   <td>{dynamicData.concepto}</td>
-                  <td>{dynamicData.descripcion}</td>
+                  <td className="text-left">{dynamicData.descripcion_min}</td>
                   <td>{dynamicData.codigo}</td>
                   <td>{dynamicData.sigla_programa}</td>
                   <td>{dynamicData.recibo}</td>
@@ -499,7 +531,7 @@ class ListarComponentes extends Component {
                     {dynamicData.mascara} {dynamicData.importe}
                   </td>
                   <td>{dynamicData.fecha}</td>
-                  <td>
+                  <td className={this.state.expand ? "" : "d-none"}>
                     <Combo
                       items={this.state.ubicDato}
                       val={this.handleChangeUbic}
@@ -508,15 +540,7 @@ class ListarComponentes extends Component {
                     />
                   </td>
 
-                  <td>
-                    <Combodos
-                      items={this.state.tipoDato}
-                      val={this.handleChangeType}
-                      tipo={dynamicData.tipo}
-                      id_rec={dynamicData.id_rec}
-                    />
-                  </td>
-                  <td>
+                <td className={this.state.expand ? "" : "d-none"}>
                     <Check
                       validado={dynamicData.validado}
                       id={dynamicData.id_rec}
@@ -524,8 +548,8 @@ class ListarComponentes extends Component {
                       disabled={true}
                     />
                   </td>
-                  <td className="two-fields">
-                    <button
+                  <td className={this.state.expand ? "two-fields" : "d-none"}>
+                    < button
                       id={dynamicData.observacion}
                       name={dynamicData.id_rec}
                       onClick={e =>
@@ -549,6 +573,9 @@ class ListarComponentes extends Component {
                       <span className="mybtn-blue glyphicon glyphicon-eye-open" />
                     </button>
                   </td>
+                  <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
+                  <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
+                  
                 </tr>
               ))}
             </tbody>

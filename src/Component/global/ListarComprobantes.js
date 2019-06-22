@@ -5,17 +5,14 @@ import Modal2 from './Modal2';
 import Combo from './Combo';
 import URL from './API/API';
 import Check from './Check';
-import MyModalUpg from './MyModalUpg'; 
+import MyModalUpg from './MyModalUpg';
 import Listardatos from './ListarComprobantes';
-
 import './css/DatosCSS.css';
 import './css/bootstrap.css';
 import './css/bootstrap.min.css';
 //import Datos from './Datos/Items';
 import swal from 'sweetalert';
-
 import ModalAsignar from './ModalAsignar';
-
 
 class ListarComponentes extends Component {
     constructor(...props) {
@@ -33,7 +30,7 @@ class ListarComponentes extends Component {
         this.groupBy = this.groupBy.bind(this);
         this.eventoNombre = this.eventoNombre.bind(this);
 
-
+        //Cambios
         this.asignar_desasignar = this.asignar_desasignar.bind(this);
         this.desasignarAlumno = this.desasignarAlumno.bind(this);
 
@@ -41,11 +38,12 @@ class ListarComponentes extends Component {
         this.updateTable = this.updateTable.bind(this);
 
         this.state = {
-            data         : null,
-            dataOrdenada : null,
-            ubicDato     : [],
-            JSON         : [],
-            isLoading    : false,
+            data: null,
+            dataOrdenada: null,
+            ubicDato: [],
+            JSON: [],
+            isLoading: false,
+
             // oculto:true,
             addClass     : false,
 
@@ -105,13 +103,14 @@ class ListarComponentes extends Component {
 
     componentWillMount() {
         let arreglo = [];
-        const lista = this.props.listado; //lo pasa de content.js 
+        const lista = this.props.listado; //Lo pasa de content.js
         if (lista !== null) {
             lista.map((item, key) => {
-                arreglo = arreglo.concat(new this.Obj(item.id_alum,item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
-                    && item.id_ubicacion, item.validado, item.nombre,
-                    item.concepto, item.descripcion,item.id_programa, item.sigla_programa, item.codigo, item.recibo, item.moneda, item.mascara,
-                    item.importe, item.fecha, item.dni, item.nombre_programa, item.id_registro
+                arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
+                    && item.id_ubicacion, item.tipo, item.validado, item.nombre,
+                    item.concepto, item.descripcion_min, item.sigla_programa, item.id_programa,
+                    item.id_registro, item.codigo, item.recibo, item.moneda, item.mascara,
+                    item.importe, item.fecha, item.id_alum
                 ));
                 return null;
             });
@@ -126,19 +125,14 @@ class ListarComponentes extends Component {
                 return 0;
             });
             //console.log(arreglo);
-            //console.log(listadoOrdenado);
             this.setState({
                 data: listadoOrdenado
             }/*, function () {
                 console.log("call"+this.state.data)
             }*/);
-
-            /* JDLC ADD => COMMENTED 4 TEST
             this.setState({
                 data: arreglo
             });
-            END TEST*/
-
             //console.log( listadoOrdenado );
             /*this.setState({
                dataOrdenada:listadoOrdenado
@@ -156,7 +150,6 @@ class ListarComponentes extends Component {
             .then(res => res.json())
             .then(res => {
                 if (res.status) { // exito
-                    console.log(res);
                     let dataTipo = res["data"];
                     this.setState({
                         ubicDato: dataTipo
@@ -200,28 +193,29 @@ class ListarComponentes extends Component {
     }
 
     //crea un objeto para pasar al hijo
-    Obj(id_alum,id_rec, obs, obs_upg, ubic, validado, nombre, concepto, descripcion,id_programa, sigla_programa, codigo, recibo,
-        moneda, mascara, importe, fecha, dni, nombre_programa, id_registro) {
-        this.id_alum = id_alum;
+    Obj(id_rec, obs, obs_upg, ubic, tipo, validado, nombre, concepto, descripcion_min, sigla_programa, id_programa, id_registro, codigo, recibo,
+        moneda, mascara, importe, fecha, id_alum) {
         this.id_rec = id_rec;
         this.obs = obs;
         this.obs_upg = obs_upg;
         this.ubic = ubic;
+        this.tipo = tipo;
         this.validado = validado;
         this.nombre = nombre;
         this.concepto = concepto;
-        this.descripcion = descripcion;
-        this.id_programa = id_programa;
+        this.descripcion_min = descripcion_min;
         this.sigla_programa = sigla_programa;
+        this.id_programa = id_programa;
+        this.id_registro = id_registro;
         this.codigo = codigo;
         this.recibo = recibo;
         this.moneda = moneda;
-        this.id_registro = id_registro;
         this.mascara = mascara;
         this.importe = importe;
-        this.dni = dni;
-        this.nombre_programa = nombre_programa;
-        this.id_registro = id_registro;
+        this.fecha =
+            fecha &&
+            fecha.substr(8, 2) + "-" + fecha.substr(5, 2) + "-" + fecha.substr(0, 4);
+        this.id_alum = id_alum;
         //console.log(convertDateFormat(fecha.substr(0,10)));
         if (fecha !== null) {
             let fTemp = fecha.substr(0, 10).split("-");
@@ -454,9 +448,10 @@ class ListarComponentes extends Component {
     // MODAL PARA ASIGNAR
     // ============================================
 
+
+
     openModalUpg(e) {
         let id = e;
-        console.log(id);
         const url = 'https://back-demo-sigap.herokuapp.com/recaudaciones/observaciones/' + id;
         //console.log(url);
         fetch(url, {
@@ -467,7 +462,6 @@ class ListarComponentes extends Component {
             }
         }).then(res => res.json())
             .then(res => {
-                console.log(res);
                 if (res.status) {
                     this.setState({
                         obsUpg: res.data
@@ -503,8 +497,6 @@ class ListarComponentes extends Component {
         })
             .then(res => res.json())
             .then(res => {
-                console.log(res);
-
                 if (res.status) { // exito
                     this.setState({
                         isLoading: false
@@ -554,29 +546,42 @@ class ListarComponentes extends Component {
         ReactDOM.render(component, node);
     }
 
-    toggle() {
-        this.setState({ addClass: !this.state.addClass });
+    expandirTabla(e) {
+        if (!this.state.expand) {
+            this.setState({ expand: true });
+            e.target.innerHTML = "VER MENOS";
+        } else {
+            this.setState({ expand: false });
+            e.target.innerHTML = "VER MÁS";
+        }
+        console.log(this.state.expand);
     }
 
     render() {
         const listado = this.state.data;
         //console.log(listado);
-        let boxClass = ["box"];
-        if (this.state.addClass) {
-            boxClass.push('green');
-            //   boxClass.push('green');
-        }
-
-        let boxClassE = ["boxE"];
-        if (this.state.addClass) {
-            boxClassE.push('eyes');
-            //   boxClass.push('green');
-        }
         return (
+
             <div className="table-scroll">
-                {/* <button className="btn btn-success btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>  */}
-                {this.state.addClass ? <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar -</button>
-                    : <button className="btn btn-more" onClick={this.toggle.bind(this)}>Mostrar +</button>}
+                <div className="botones">
+                    {/* <div className="container">
+                            <button id="btnNuevaR"  onClick={this.handleNuevo} className="btn btn-outline-success">Nueva</button>
+                        </div> */}
+                    <div className="contenedor-flex flex-sb">
+                        <div>
+                            <button className="btn btn-outline-primary" onClick={e => this.expandirTabla(e)}>VER MÁS</button>
+                        </div>
+                        <div>
+                            <button
+                                id="Registrar"
+                                onClick={this.handleEnviarData}
+                                className="btn btn-outline-danger"
+                            >
+                                Registrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <table className="table table-striped table-bordered table-hover">
                     <thead>
                         <tr className="tabla-cabecera">
@@ -584,19 +589,18 @@ class ListarComponentes extends Component {
                             <th>Nombre Apellido</th>
                             <th>Concepto</th>
                             <th>Descripcion</th>
-                            <th>Codigo</th>
                             <th>Programa</th>
-                            <th>Tipo de carga</th>
+                            <th>Codigo</th>
                             <th>Recibo</th>
                             <th>Moneda</th>
-                            <th>Registro</th>
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Ubicación</th>
                             <th>Verificar</th>
-                            <th className={boxClassE.join(' ')}>Observaciones</th>
-                            <th className={boxClass.join(' ')}>Asignar/Desagsinar</th>
-
+                            <th>Observaciones</th>
+                            <th>Asignar/Desagsinar</th>
+                            <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
+                            <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
                         </tr>
                     </thead>
                     <tbody>{listado.map((dynamicData, i) =>
@@ -604,33 +608,40 @@ class ListarComponentes extends Component {
                             <td>{i + 1}</td>
                             <td onClick={(e) => this.eventoNombre(e)} title="click para ver detalles" className="detalles" id={(dynamicData.codigo === "0") ? (dynamicData.nombre) : (dynamicData.codigo)}>{dynamicData.nombre}</td>
                             <td>{dynamicData.concepto}</td>
-                            <td>{dynamicData.descripcion}</td>
-                            <td>{dynamicData.codigo===null || dynamicData.codigo==='' ? '' : dynamicData.codigo}</td>
-                            <td>{dynamicData.sigla_programa===null || dynamicData.sigla_programa===''?'':dynamicData.sigla_programa}</td>
-                            <td>{dynamicData.id_registro}</td>
+                            <td className="text-left">{dynamicData.descripcion_min}</td>
+                            <td>{dynamicData.sigla_programa}</td>
+                            <td>{dynamicData.codigo}</td>
                             <td>{dynamicData.recibo}</td>
                             <td>{dynamicData.moneda}</td>
-                            <td>{dynamicData.id_registro}</td>
                             <td>{dynamicData.mascara} {dynamicData.importe}</td>
                             <td>{dynamicData.fecha.substring(0,10)}</td>
-                            <td><Combo items={this.state.ubicDato} val={this.handleChangeUbic} ubic={dynamicData.ubic}
-                                id_rec={dynamicData.id_rec} />
+                            <td>
+                                <Combo
+                                    items={this.state.ubicDato}
+                                    val={this.handleChangeUbic}
+                                    ubic={dynamicData.ubic}
+                                    id_rec={dynamicData.id_rec}
+                                />
                             </td>
                             <td>
-                                <Check validado={dynamicData.validado} id={dynamicData.id_rec}
-                                    change={this.handleChangeEstado} />
+                                <Check
+                                    validado={dynamicData.validado}
+                                    id={dynamicData.id_rec}
+                                    change={this.handleChangeEstado}
+                                    disabled={true}
+                                />
                             </td>
-                            <td className={boxClassE.join(' ')}>
+                            <td className="two-fields">
                                 <button id={dynamicData.observacion} name={dynamicData.id_rec}
                                     onClick={(e) => this.openModal(dynamicData.id_rec, dynamicData.obs)} className="btn btn-primary">
                                     <span className="mybtn-red glyphicon glyphicon-eye-open"></span>
                                 </button>
-                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs_upg)} className="btn btn-primary">
+                                <button id={dynamicData.observacion} name={dynamicData.id_rec}
+                                    onClick={(e) => this.openModalUpg(dynamicData.id_rec, dynamicData.obs)} className="btn btn-primary">
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td className={boxClass.join(' ')}>
+                            <td>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
                                     onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
                                     Asignar
@@ -640,14 +651,16 @@ class ListarComponentes extends Component {
                                     Desasignar
                                 </button>
                             </td>
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
                         </tr>
                     )}
                     </tbody>
                 </table>
-                <div className="center-block">
-                    <button id="Enviar" onClick={this.handleEnviarData} className="btn-enviar">Registrar</button>
+                <div>
                 </div>
             </div >
+
         );
     }
 }
