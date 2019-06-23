@@ -350,7 +350,7 @@ class ModalAsignar extends Component {
                         <ModalBody>
                             <div className="modal-centrado">
                                 <h4 className="reducir">Estudiante </h4>
-                                <div id="separar" >
+                                <div id="separar-1" >
                                     <InputGroup id="separar2">
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>Codigo</InputGroupText>
@@ -358,7 +358,7 @@ class ModalAsignar extends Component {
                                         <Input disabled value={this.state.codigoAlumno}/>
                                     </InputGroup>
                                 </div>
-                               <div id="separar">
+                               <div id="separar-2">
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>Programa</InputGroupText>

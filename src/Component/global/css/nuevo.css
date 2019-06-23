@@ -17,11 +17,26 @@
       margin-right: 10px;
   }
   
-  #separar{
+  #separar-1{
       margin-bottom: 10px;
       width: 50%;
+      float: left;
   }
   
+  #separar-2{
+      margin-bottom: 10px;
+      width: 50%;
+      float: right;
+  }
+  
+  #div-uno{
+    width: 400px;
+    float: left;
+  }
+  #div-dos{
+    width: 400px;
+    float: right;
+  }
   #columna-boton{
       margin-right: 15px;
       margin-left: 10px;
@@ -34,6 +49,7 @@
   }
   
   .modal-centrado{
+      width: 800px;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 10px;
