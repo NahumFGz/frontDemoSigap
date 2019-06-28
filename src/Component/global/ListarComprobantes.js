@@ -596,9 +596,9 @@ class ListarComponentes extends Component {
                             <th>Fecha</th>
                             <th>Ubicación</th>
                             <th>Verificar</th>
+                            <th>Observaciones</th>
                             <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
                             <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
-                            <th>Observaciones</th>
                             <th className={this.state.expand ? "" : "d-none"}>Asignar/Desasignar</th>
                             
                         </tr>
@@ -635,12 +635,6 @@ class ListarComponentes extends Component {
                                     disabled={true}
                                 />
                             </td>
-
-
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
-
-
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
                             
 
                             <td className="two-obs">
@@ -653,6 +647,11 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
+
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
+
+
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>                         
 
 
 
