@@ -14,6 +14,9 @@ import './css/bootstrap.min.css';
 import swal from 'sweetalert';
 import ModalAsignar from './ModalAsignar';
 
+import {FaCheck} from 'react-icons/fa';
+import {FaWindowClose} from 'react-icons/fa';
+
 class ListarComponentes extends Component {
     constructor(...props) {
         super(...props);
@@ -597,9 +600,9 @@ class ListarComponentes extends Component {
                             <th>Ubicación</th>
                             <th>Verificar</th>
                             <th>Observaciones</th>
+                            <th className={this.state.expand ? "" : "d-none"}>Asignar/Desasignar</th>
                             <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
                             <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
-                            <th className={this.state.expand ? "" : "d-none"}>Asignar/Desasignar</th>
                             
                         </tr>
                     </thead>
@@ -648,6 +651,17 @@ class ListarComponentes extends Component {
                                 </button>
                             </td>
 
+                            <td className={this.state.expand ? "two-fields" : "d-none two-fields"}>
+                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
+                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
+                                    <FaCheck/>
+                                </button>
+                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
+                                    onClick={(e) =>this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,2,dynamicData.id_alum,dynamicData.sigla_programa)} className="btn btn-danger">
+                                    <FaWindowClose/>
+                                </button>
+                            </td>
+
                             <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
 
 
@@ -655,16 +669,7 @@ class ListarComponentes extends Component {
 
 
 
-                            <td className={this.state.expand ? "two-fields" : "d-none two-fields"}>
-                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
-                                    Asignar
-                                </button>
-                                <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
-                                    onClick={(e) =>this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,2,dynamicData.id_alum,dynamicData.sigla_programa)} className="btn btn-danger">
-                                    Desasignar
-                                </button>
-                            </td>
+                            
                             
 
                         </tr>
