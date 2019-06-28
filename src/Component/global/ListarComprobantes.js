@@ -596,11 +596,11 @@ class ListarComponentes extends Component {
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Ubicación</th>
-                            <th className={this.state.expand ? "" : "d-none"}>Verificar</th>
+                            <th>Verificar</th>
+                            <th>Observaciones</th>
                             <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
                             <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
-                            <th>Observaciones</th>
-                            <th >Asignar/Desasignar</th>
+                            <th className={this.state.expand ? "" : "d-none">Asignar/Desasignar</th>
                             
                         </tr>
                     </thead>
@@ -632,9 +632,7 @@ class ListarComponentes extends Component {
                                     disabled={true}
                                 />
                             </td>
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
-                            <td className="two-obs">
+                             <td className="two-obs">
                                 <button id={dynamicData.observacion} name={dynamicData.id_rec}
                                     onClick={(e) => this.openModal(dynamicData.id_rec, dynamicData.obs)} className="btn btn-primary">
                                     <span className="mybtn-red glyphicon glyphicon-eye-open"></span>
@@ -644,7 +642,9 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td className="two-fields">
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
+                            <td className="two-fields" className={this.state.expand ? "" : "d-none">
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
                                     onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
                                     Asignar
