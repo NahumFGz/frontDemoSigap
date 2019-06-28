@@ -346,7 +346,6 @@ class ListarComponentes extends Component {
                             //Error
                             this.data[0].codigo = "312312";
                             this.data[0].id_programa = "4323232";
-
                             */
                             
                             swal("Alumno desasignado","El alumno fue desasignado exitosamente",{ icon:"success",
@@ -596,11 +595,11 @@ class ListarComponentes extends Component {
                             <th>Importe</th>
                             <th>Fecha</th>
                             <th>Ubicación</th>
-                            <th>Verificar</th>
-                            <th>Observaciones</th>
+                            <th className={this.state.expand ? "" : "d-none"}>Verificar</th>
                             <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
                             <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
-                            <th className={this.state.expand ? "" : "d-none">Asignar/Desasignar</th>
+                            <th>Observaciones</th>
+                            <th >Asignar/Desasignar</th>
                             
                         </tr>
                     </thead>
@@ -632,7 +631,9 @@ class ListarComponentes extends Component {
                                     disabled={true}
                                 />
                             </td>
-                             <td className="two-obs">
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
+                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
+                            <td className="two-obs">
                                 <button id={dynamicData.observacion} name={dynamicData.id_rec}
                                     onClick={(e) => this.openModal(dynamicData.id_rec, dynamicData.obs)} className="btn btn-primary">
                                     <span className="mybtn-red glyphicon glyphicon-eye-open"></span>
@@ -642,9 +643,7 @@ class ListarComponentes extends Component {
                                     <span className="mybtn-blue glyphicon glyphicon-eye-open"></span>
                                 </button>
                             </td>
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.tipo}</td>
-                            <td className={this.state.expand ? "" : "d-none"}>{dynamicData.id_registro == 2103 ? "DIGITADO" : "REMITIDO"}</td>
-                            <td className="two-fields" className={this.state.expand ? "" : "d-none">
+                            <td className="two-fields">
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
                                     onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
                                     Asignar
