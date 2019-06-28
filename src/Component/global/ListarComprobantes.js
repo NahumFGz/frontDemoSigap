@@ -599,7 +599,7 @@ class ListarComponentes extends Component {
                             <th className={this.state.expand ? "" : "d-none"}>Cuenta del Banco</th>
                             <th className={this.state.expand ? "" : "d-none"}>Tipo de Carga</th>
                             <th>Observaciones</th>
-                            <th >Asignar/Desasignar</th>
+                            <th className={this.state.expand ? "" : "d-none"}>Asignar/Desasignar</th>
                             
                         </tr>
                     </thead>
@@ -656,7 +656,7 @@ class ListarComponentes extends Component {
 
 
 
-                            <td className="two-fields">
+                            <td className="two-fields" className={this.state.expand ? "" : "d-none"}>
                                 <button id={dynamicData.observacion_upg} name={dynamicData.id_rec}
                                     onClick={(e) => this.asignar_desasignar(dynamicData.recibo,dynamicData.codigo,dynamicData.id_programa,1,dynamicData.id_alum,dynamicData.nombre, dynamicData.fecha,dynamicData.sigla_programa)} className="btn btn-success">
                                     Asignar
