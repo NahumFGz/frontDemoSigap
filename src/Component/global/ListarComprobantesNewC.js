@@ -439,23 +439,6 @@ class ListarComponentes extends Component {
     console.log(this.state.expand);
   }
 
-  eventoNombre(e, f, c, d, b) {
-    let id_alum = e;
-    let nom = f;
-    let cod = c;
-    let sig = d;
-    let idp = b;
-    ModalManager.open(
-      <Modal2
-        id={id_alum}
-        nombre={nom}
-        codigo={cod}
-        sigla={sig}
-        idPrograma={idp}
-      />
-    );
-  }
-
   render() {
     const listado = this.state.data;
     //console.log(this.props);

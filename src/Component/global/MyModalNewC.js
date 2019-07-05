@@ -402,4 +402,4 @@ class MyModal extends Component {
     );
   }
 }
-export default MyModal; 
+export default MyModal;
