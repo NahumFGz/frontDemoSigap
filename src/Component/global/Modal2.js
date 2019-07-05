@@ -36,7 +36,7 @@ class MyModal extends Component {
                 }
                 return null;
             });
-            arre = [Object.keys(text)[i]].sort((a, b) => {
+            arre = text[Object.keys(text)[i]].sort((a, b) => {
                 if (a.concepto > b.concepto) {
                     return 1;
                 }
@@ -53,7 +53,7 @@ class MyModal extends Component {
                 }
                 return null;
             });
-            arre = text[Object.keys(text)[i]].sort((a, b) => {
+            arre = [Object.keys(text)[i]].sort((a, b) => {
                 if (a.nombre > b.nombre) {
                     return 1;
                 }
@@ -217,7 +217,19 @@ class MyModal extends Component {
         for (let m = 0; m < dat2.length; m++) {
 
             if (dat2) {
-                lista = [m + 1, this.state.dataAlterar[m].concepto, this.state.dataAlterar[m].recibo, this.state.dataAlterar[m].moneda, this.state.dataAlterar[m].importe, this.state.dataAlterar[m].fecha]
+                if (this.state.dataAlterar[m].moneda == 'SOL') {
+                    lista = [m + 1, this.state.dataAlterar[m].concepto, this.state.dataAlterar[m].recibo, this.state.dataAlterar[m].moneda, "S/." + this.state.dataAlterar[m].importe, this.state.dataAlterar[m].fecha]
+                }
+                if (this.state.dataAlterar[m].moneda == 'DOL') {
+                    lista = [m + 1, this.state.dataAlterar[m].concepto, this.state.dataAlterar[m].recibo, this.state.dataAlterar[m].moneda, "$/." + this.state.dataAlterar[m].importe, this.state.dataAlterar[m].fecha]
+                }
+                if (this.state.dataAlterar[m].recibo == 'Subsuma Dolares') {
+                    lista = [m + 1, this.state.dataAlterar[m].concepto, this.state.dataAlterar[m].recibo, this.state.dataAlterar[m].moneda, "$/." + this.state.dataAlterar[m].importe, this.state.dataAlterar[m].fecha]
+                }
+                if (this.state.dataAlterar[m].recibo == 'Subsuma Soles') {
+                    lista = [m + 1, this.state.dataAlterar[m].concepto, this.state.dataAlterar[m].recibo, this.state.dataAlterar[m].moneda, "S/." + this.state.dataAlterar[m].importe, this.state.dataAlterar[m].fecha]
+                }
+                //lista = [m + 1, this.state.dataAlterar[m].concepto, this.state.dataAlterar[m].recibo, this.state.dataAlterar[m].moneda, "S/." + this.state.dataAlterar[m].importe, this.state.dataAlterar[m].fecha]
                 console.log(lista);
                 listadoFinal.push(lista)
             }
@@ -368,11 +380,11 @@ class MyModal extends Component {
         doc.setFont("helvetica");
         doc.setFontType("normal");
         doc.setFontSize(9);
-        if (this.state.data[0].sigla_programa == null) {
+        if (this.state.data[0].nombre_programa == null) {
             doc.text("  ", 150, 180);
         }
         else {
-            doc.text(this.state.data[0].sigla_programa, 150, 180); //AQUI VA EL DNI
+            doc.text(this.state.data[0].nombre_programa, 150, 180); //AQUI VA EL DNI
         }
         //doc.text(this.state.data[0].nombre_programa, 150, 180);//programa
 
@@ -462,7 +474,7 @@ class MyModal extends Component {
             first = doc.autoTable.previous;
             doc.setFont("helvetica");
             doc.setFontType("bold");
-            doc.setFontSize(11);
+            doc.setFontSize(10); //cambioooooooo
             doc.text("TOTAL CANCELADO SOLES: S/." + this.sumaTotalSoles(), 520, first.finalY + 25);
             //  doc.text("TOTAL CANCELADO: S/."+this.sumaTotalSoles,620,first.finalY+25);
         }
@@ -470,8 +482,8 @@ class MyModal extends Component {
             first = doc.autoTable.previous;
             doc.setFont("helvetica");
             doc.setFontType("bold");
-            doc.setFontSize(11);
-            doc.text("TOTAL CANCELADO DOLARES: S/." + this.sumaTotalDolares(), 520, first.finalY + 50);
+            doc.setFontSize(10);
+            doc.text("TOTAL CANCELADO DOLARES: $/." + this.sumaTotalDolares(), 520, first.finalY + 50);
             //  doc.text("TOTAL CANCELADO: S/."+this.sumaTotalSoles,620,first.finalY+25);
         }
 
