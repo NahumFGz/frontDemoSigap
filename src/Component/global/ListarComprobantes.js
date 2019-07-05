@@ -112,7 +112,7 @@ class ListarComponentes extends Component {
                 arreglo = arreglo.concat(new this.Obj(item.id_rec, item.observacion, item.observacion_upg, item.id_ubicacion
                     && item.id_ubicacion, item.tipo, item.validado, item.nombre,
                     item.concepto, item.descripcion_min, item.sigla_programa, item.id_programa,
-                    item.id_registro, item.codigo, item.recibo, item.moneda, item.mascara,
+                    item.id_registro, item.codigo, item.dni, item.recibo, item.moneda, item.mascara,
                     item.importe, item.fecha, item.id_alum
                 ));
                 return null;
@@ -196,7 +196,7 @@ class ListarComponentes extends Component {
     }
 
     //crea un objeto para pasar al hijo
-    Obj(id_rec, obs, obs_upg, ubic, tipo, validado, nombre, concepto, descripcion_min, sigla_programa, id_programa, id_registro, codigo, recibo,
+    Obj(id_rec, obs, obs_upg, ubic, tipo, validado, nombre, concepto, descripcion_min, sigla_programa, id_programa, id_registro, codigo, dni, recibo,
         moneda, mascara, importe, fecha, id_alum) {
         this.id_rec = id_rec;
         this.obs = obs;
