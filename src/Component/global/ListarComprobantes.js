@@ -211,6 +211,7 @@ class ListarComponentes extends Component {
         this.id_programa = id_programa;
         this.id_registro = id_registro;
         this.codigo = codigo;
+		this.dni = dni;
         this.recibo = recibo;
         this.moneda = moneda;
         this.mascara = mascara;
