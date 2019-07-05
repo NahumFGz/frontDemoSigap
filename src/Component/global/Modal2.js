@@ -36,7 +36,7 @@ class MyModal extends Component {
                 }
                 return null;
             });
-            arre = text[Object.keys(text)[i]].sort((a, b) => {
+            arre = [Object.keys(text)[i]].sort((a, b) => {
                 if (a.concepto > b.concepto) {
                     return 1;
                 }
@@ -368,11 +368,11 @@ class MyModal extends Component {
         doc.setFont("helvetica");
         doc.setFontType("normal");
         doc.setFontSize(9);
-        if (this.state.data[0].nombre_programa == null) {
+        if (this.state.data[0].sigla_programa == null) {
             doc.text("  ", 150, 180);
         }
         else {
-            doc.text(this.state.data[0].nombre_programa, 150, 180); //AQUI VA EL DNI
+            doc.text(this.state.data[0].sigla_programa, 150, 180); //AQUI VA EL DNI
         }
         //doc.text(this.state.data[0].nombre_programa, 150, 180);//programa
 
