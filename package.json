@@ -10,7 +10,7 @@
     "ajv": "^6.0.0",
     "bootstrap": "^4.1.1",
     "html2canvas": "^1.0.0-alpha.12",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.4.1",
     "jspdf-autotable": "^2.3.5",
     "prop-types": "^15.6.1",
