@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
-    "ajv": "^6.0.0",
+    "ajv": "^6.12.3",
     "bootstrap": "^4.1.1",
     "html2canvas": "^1.0.0-alpha.12",
     "jquery": "^3.3.1",
